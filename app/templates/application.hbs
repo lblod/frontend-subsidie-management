@@ -1,7 +1,48 @@
-{{page-title "FrontendSubsidieManagement"}}
+{{page-title "Subsidiemanagement"}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<AuApp>
+  <AuMainHeader
+    @brandLink={{unless
+      this.session.isAuthenticated
+      "https://www.vlaanderen.be/nl"
+    }}
+    @homeRoute="index"
+    @appTitle={{this.appTitle}}
+  >
+    <li class="au-c-list-horizontal__item">
+      <AuLinkExternal
+        href="https://abb-vlaanderen.gitbook.io/informatie-lpdc/"
+        @icon="question-circle"
+        @skin="secondary"
+      >
+        Help
+      </AuLinkExternal>
+    </li>
+    <li class="au-c-list-horizontal__item">
+      {{#if this.session.isAuthenticated}}
+        <AuLink
+            @route="auth.logout"
+            @icon="logout"
+          >
+            Afmelden
+          </AuLink>
+      {{else}}
+        {{!-- <LoginButton @isCompact={{true}} /> --}}
+      {{/if}}
+    </li>
+  </AuMainHeader>
 
-{{outlet}}
+  {{#if this.session.isAuthenticated}}
+    <AuMainContainer as |main|>
+      <main.content>
+        <AuBodyContainer>
+          <AuBodyContainer id="content">
+            {{outlet}}
+          </AuBodyContainer>
+        </AuBodyContainer>
+      </main.content>
+    </AuMainContainer>
+  {{else}}
+    {{outlet}}
+  {{/if}}
+</AuApp>
