@@ -11,42 +11,26 @@ export default class CurrentSessionService extends Service {
   @tracked group;
   @tracked groupClassification;
   @tracked roles = [];
+  isLoaded = false;
 
   async load() {
-    if (this.session.isAuthenticated) {
-      let sessionData = this.session.data.authenticated;
-      let accountId = sessionData.relationships.account.data.id;
+    if (this.session.isAuthenticated && !this.isLoaded) {
+      let accountId =
+        this.session.data.authenticated.relationships.account.data.id;
       this.account = await this.store.findRecord('account', accountId, {
         include: 'gebruiker',
       });
 
       this.user = await this.account.gebruiker;
+      this.roles = this.session.data.authenticated.data.attributes.roles;
 
-      let groupId = sessionData.relationships.group.data.id;
+      let groupId = this.session.data.authenticated.relationships.group.data.id;
       this.group = await this.store.findRecord('bestuurseenheid', groupId, {
         include: 'classificatie',
       });
       this.groupClassification = await this.group.classificatie;
-      this.roles = sessionData.data.attributes.roles || [];
+
+      this.isLoaded = true;
     }
-  }
-
-  canAccess(role) {
-    return this.roles.includes(role);
-  }
-
-  get canReadVlabel() {
-    return this.canAccess('ABBDatabankToezicht-DatabankToezichtVLABEL');
-  }
-
-  get canRead() {
-    return (
-      this.canAccess('ABBDatabankToezicht-DatabankToezichtLezer') ||
-      this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur')
-    );
-  }
-
-  get canWrite() {
-    return this.canAccess('ABBDatabankToezicht-DatabankToezichtEditeur');
   }
 }
