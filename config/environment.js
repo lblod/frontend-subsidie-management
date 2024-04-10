@@ -18,6 +18,14 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    acmidm: {
+      clientId: '{{ACMIDM_CLIENT_ID}}',
+      scope: '{{ACMIDM_SCOPE}}',
+      authUrl: '{{ACMIDM_AUTH_URL}}',
+      logoutUrl: '{{ACMIDM_LOGOUT_URL}}',
+      authRedirectUrl: '{{ACMIDM_AUTH_REDIRECT_URL}}',
+      switchRedirectUrl: '{{ACMIDM_SWITCH_REDIRECT_URL}}',
+    }
   };
 
   if (environment === 'development') {
