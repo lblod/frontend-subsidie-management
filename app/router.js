@@ -14,4 +14,9 @@ Router.map(function () {
     this.route('cookieverklaring');
     this.route('toegankelijkheidsverklaring');
   });
+
+  this.route('auth', function() {
+    this.route('login');
+  });
+  this.route('mock-login');
 });
