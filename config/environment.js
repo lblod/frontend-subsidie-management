@@ -7,7 +7,7 @@ module.exports = function (environment) {
     rootURL: '/',
     locationType: 'history',
     EmberENV: {
-      EXTEND_PROTOTYPES: false,
+      // EXTEND_PROTOTYPES: false, // TODO: disable the prototypes and fix all the cases where we depended on this
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
@@ -18,14 +18,44 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    moment: {
+      allowEmpty: true,
+      includeLocales: ['nl-be'],
+      includeTimezone: 'all',
+    },
     acmidm: {
       clientId: '{{ACMIDM_CLIENT_ID}}',
-      scope: '{{ACMIDM_SCOPE}}',
+      scope: 'openid rrn vo profile abb_loketLB',
       authUrl: '{{ACMIDM_AUTH_URL}}',
       logoutUrl: '{{ACMIDM_LOGOUT_URL}}',
       authRedirectUrl: '{{ACMIDM_AUTH_REDIRECT_URL}}',
       switchRedirectUrl: '{{ACMIDM_SWITCH_REDIRECT_URL}}',
-    }
+    },
+    features: {
+      // 'feature-name': '{{FEATURE_ENV_VAR_NAME}}',
+    },
+    lpdcUrl: '{{LPDC_URL}}',
+    worshipDecisionsDatabaseUrl: '{{WORSHIP_DECISIONS_DATABASE_URL}}',
+    worshipOrganisationsDatabaseUrl: '{{WORSHIP_ORGANISATIONS_DATABASE_URL}}',
+    verenigingenUrl: '{{VERENIGINGEN_URL}}',
+    contactUrl: '{{CONTACT_URL}}',
+    'ember-plausible': {
+      enabled: false,
+    },
+    plausible: {
+      domain: '{{ANALYTICS_APP_DOMAIN}}',
+      apiHost: '{{ANALYTICS_API_HOST}}',
+    },
+    sentry: {
+      dsn: '{{SENTRY_DSN}}',
+      environment: '{{SENTRY_ENVIRONMENT}}',
+    },
+    '@sentry/ember': {
+      // Performance tracking isn't super useful for us yet and it sends a lot of data to the backend (which counts against the free tier limit).
+      // It also prevents the performance instrumentation code from running when Sentry isn't enabled (which is something that ideally is fixed in the addon itself).
+      disablePerformance: true,
+    },
+    globalSystemNotification: '{{GLOBAL_SYSTEM_NOTIFICATION}}',
   };
 
   if (environment === 'development') {

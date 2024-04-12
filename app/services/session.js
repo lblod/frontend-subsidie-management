@@ -1,10 +1,19 @@
+import { inject as service } from '@ember/service';
 import SessionService from 'ember-simple-auth/services/session';
 
-export default class AppSessionService extends SessionService {
+export default class LoketSessionService extends SessionService {
+  @service currentSession;
+
   get isMockLoginSession() {
     return this.isAuthenticated
       ? this.data.authenticated.authenticator.includes('mock-login')
       : false;
+  }
+
+  async handleAuthentication(routeAfterAuthentication) {
+    // We wait for the currentSession to load before navigating. This fixes the empty index page since the data might not be loaded yet.
+    await this.currentSession.load();
+    super.handleAuthentication(routeAfterAuthentication);
   }
 
   handleInvalidation() {
