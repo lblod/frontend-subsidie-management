@@ -2,8 +2,44 @@
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
     <div>
-      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidie types</AuHeading>
-      <p>Hier vindt u een overzicht van alle subsidie types voor uw bestuur.</p>
+      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidietypes</AuHeading>
+      <p>Hier vindt u een overzicht van alle subsidietypes voor uw bestuur.</p>
     </div>
   </Group>
 </AuToolbar>
+
+<main id="main" class="au-c-main-container">
+  <div class="au-c-main-container__content">
+    <div class="au-c-body-container">
+      <AuDataTable
+        @content={{this.model}}
+        @isLoading={{this.isLoadingModel}}
+        @noDataMessage="Geen subsidietypes gevonden"
+        @sort={{this.sort}}
+        @page={{this.page}}
+        @size={{this.size}}
+        as |t|
+      >
+        <t.content as |c|>
+          <c.header>
+            <AuDataTableThSortable
+                @label="subsidietype"
+                @field="label"
+                @currentSorting={{this.sort}}
+                class="au-u-visible-medium-up"
+              />
+          </c.header>
+          <c.body as |subsidyMeasure|>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              <AuLink
+                @model={{subsidyMeasure.id}}
+              >
+                {{subsidyMeasure.subsidyMeasureOffer.title}}
+              </AuLink>
+            </td>
+          </c.body>
+        </t.content>
+      </AuDataTable>
+     </div>
+  </div>
+</main>   
