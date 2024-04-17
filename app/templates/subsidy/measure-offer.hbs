@@ -1,9 +1,9 @@
-{{page-title "MeasureOffer"}}
+{{page-title this.model.title}}
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
     <div>
-      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidiemaatregels</AuHeading>
-      <p>Hier vindt u een overzicht van alle subsidiemaatregels.</p>
+      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidieseries voor "{{this.model.title}}"</AuHeading>
+      <p>Hier vindt u een overzicht van de series voor {{this.model.title}}.</p>
     </div>
   </Group>
 </AuToolbar>
@@ -23,11 +23,12 @@
         <t.content as |c|>
           <c.header>
             <AuDataTableThSortable
-                @label="subsidie periode"
+                @label="subsidie serie"
                 @field="label"
                 @currentSorting={{this.sort}}
                 class="au-u-visible-medium-up"
               />
+              <th colspan="1">subsidie periode</th>
           </c.header>
           <c.body as |series|>
             <td class="au-u-visible-medium-up au-u-word-break">
@@ -36,6 +37,11 @@
               >
                 {{series.title}} 
               </AuLink>
+            </td>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+                {{series.description}}
+              </AuHelpText>
             </td>
           </c.body>
         </t.content>
