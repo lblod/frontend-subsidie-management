@@ -1,2 +1,45 @@
 {{page-title "MeasureOffer"}}
-{{outlet}}
+<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
+  <Group>
+    <div>
+      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidiemaatregels</AuHeading>
+      <p>Hier vindt u een overzicht van alle subsidiemaatregels.</p>
+    </div>
+  </Group>
+</AuToolbar>
+
+<main id="main" class="au-c-main-container">
+  <div class="au-c-main-container__content">
+    <div class="au-c-body-container">
+      <AuDataTable
+        @content={{this.model.series}}
+        @isLoading={{this.isLoadingModel}}
+        @noDataMessage="Geen periodes gevonden"
+        @sort={{this.sort}}
+        @page={{this.page}}
+        @size={{this.size}}
+        as |t|
+      >
+        <t.content as |c|>
+          <c.header>
+            <AuDataTableThSortable
+                @label="subsidie periode"
+                @field="label"
+                @currentSorting={{this.sort}}
+                class="au-u-visible-medium-up"
+              />
+          </c.header>
+          <c.body as |series|>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              <AuLink
+                
+              >
+                {{series.title}} 
+              </AuLink>
+            </td>
+          </c.body>
+        </t.content>
+      </AuDataTable>
+     </div>
+  </div>
+</main>   

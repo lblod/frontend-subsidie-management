@@ -11,7 +11,7 @@ export default class SubsidyIndexRoute extends Route.extend(DataTableRouteMixin)
 
   async model() {
     let groupId = this.currentSession.group.id;
-    let response = await this.store.query('subsidy-measure-consumption', {
+    let response = await this.store.findAll('subsidy-measure-consumption', {
       include: 'subsidy-measure-offer',
       filter: {
         participations: {
