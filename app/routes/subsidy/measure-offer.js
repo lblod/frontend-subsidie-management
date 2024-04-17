@@ -6,11 +6,9 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(DataTableRout
   @service currentSession;
   @service store;
 
-  modelName = 'subsidy-measure-offer';
-
   async model({ id: measureOfferID }) {
     let groupId = this.currentSession.group.id;
-    let response = await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
+    return await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
       include: 'series',
       filter: {
         participations: {
@@ -20,6 +18,5 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(DataTableRout
         },
       },
     });
-    return response;
   }
 }
