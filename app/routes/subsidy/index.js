@@ -10,3 +10,4 @@ export default class SubsidyIndexRoute extends Route.extend(DataTableRouteMixin)
     let response = await this.store.findAll('subsidy-measure-offer');
     return response;
   }
+}
