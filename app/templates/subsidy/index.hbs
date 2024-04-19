@@ -29,13 +29,13 @@
                 class="au-u-visible-medium-up"
               />
           </c.header>
-          <c.body as |subsidyMeasure|>
+          <c.body as |subsidyMeasureOffer|>
             <td class="au-u-visible-medium-up au-u-word-break">
               <AuLink
                 @route="subsidy.measure-offer"
-                @model={{subsidyMeasure.subsidyMeasureOffer.id}}
+                @model={{subsidyMeasureOffer.id}}
               >
-                {{subsidyMeasure.subsidyMeasureOffer.title}} 
+                {{subsidyMeasureOffer.title}} 
               </AuLink>
             </td>
           </c.body>
