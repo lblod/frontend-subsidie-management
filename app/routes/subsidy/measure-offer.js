@@ -7,16 +7,8 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(DataTableRout
   @service store;
 
   async model({ id: measureOfferID }) {
-    let groupId = this.currentSession.group.id;
     return await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
       include: 'series',
-      filter: {
-        participations: {
-          'participating-bestuurseenheid': {
-            id: groupId,
-          },
-        },
-      },
     });
   }
 }
