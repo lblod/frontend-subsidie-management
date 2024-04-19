@@ -16,7 +16,8 @@ export default class MockLoginRoute extends Route {
   }
 
   model(params) {
-    const filter = { provider: 'https://github.com/lblod/mock-login-service' };
+    const filter = { provider: 'https://github.com/lblod/mock-login-service',
+      gebruiker: { 'bestuurseenheden':'agentschap binnenlands bestuur' }};
     if (params.gemeente)
       filter.gebruiker = { bestuurseenheden: params.gemeente };
     return this.store.query('account', {
