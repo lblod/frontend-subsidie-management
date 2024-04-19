@@ -1,0 +1,46 @@
+{{page-title "Index"}}
+<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
+  <Group>
+    <div>
+      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidiemaatregels</AuHeading>
+      <p>Hier vindt u een overzicht van alle subsidiemaatregels.</p>
+    </div>
+  </Group>
+</AuToolbar>
+
+<main id="main" class="au-c-main-container">
+  <div class="au-c-main-container__content">
+    <div class="au-c-body-container">
+      <AuDataTable
+        @content={{this.model}}
+        @isLoading={{this.isLoadingModel}}
+        @noDataMessage="Geen subsidietypes gevonden"
+        @sort={{this.sort}}
+        @page={{this.page}}
+        @size={{this.size}}
+        as |t|
+      >
+        <t.content as |c|>
+          <c.header>
+            <AuDataTableThSortable
+                @label="subsidietype"
+                @field="label"
+                @currentSorting={{this.sort}}
+                class="au-u-visible-medium-up"
+              />
+          </c.header>
+          <c.body as |subsidyMeasureOffer|>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              <AuLink
+                @route="subsidy.measure-offer"
+                @model={{subsidyMeasureOffer.id}}
+              >
+                {{subsidyMeasureOffer.title}} 
+              </AuLink>
+            </td>
+          </c.body>
+        </t.content>
+      </AuDataTable>
+     </div>
+  </div>
+</main>   
