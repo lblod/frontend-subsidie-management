@@ -4,23 +4,6 @@ import { setContext, setUser } from '@sentry/ember';
 import config from 'frontend-subsidie-management/config/environment';
 import { SHOULD_ENABLE_SENTRY } from 'frontend-subsidie-management/utils/sentry';
 
-const MODULE = {
-  SUPERVISION: 'LoketLB-toezichtGebruiker',
-  BERICHTENCENTRUM: 'LoketLB-berichtenGebruiker',
-  BBCDR: 'LoketLB-bbcdrGebruiker',
-  MANDATENBEHEER: 'LoketLB-mandaatGebruiker',
-  LEIDINGGEVENDENBEHEER: 'LoketLB-leidinggevendenGebruiker',
-  PERSONEELSBEHEER: 'LoketLB-personeelsbeheer',
-  SUBSIDIES: 'LoketLB-subsidies',
-  WORSHIP_MINISTER_MANAGEMENT: 'LoketLB-eredienstBedienaarGebruiker',
-  EREDIENSTMANDATENBEHEER: 'LoketLB-eredienstMandaatGebruiker',
-  PUBLIC_SERVICES: 'LoketLB-LPDCGebruiker',
-  WORSHIP_DECISIONS_DB: 'LoketLB-databankEredienstenGebruiker',
-  WORSHIP_ORGANISATIONS_DB: 'LoketLB-eredienstOrganisatiesGebruiker',
-  VERENIGINGEN: 'abb_loketverenigingenapp',
-  CONTACT: 'abb_organisatieportaal_rol_3d',
-};
-
 export default class CurrentSessionService extends Service {
   @service session;
   @service store;
