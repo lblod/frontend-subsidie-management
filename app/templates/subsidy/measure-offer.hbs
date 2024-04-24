@@ -6,6 +6,12 @@
       <p>Hier vindt u een overzicht van de series voor {{this.model.title}}.</p>
     </div>
   </Group>
+  <Group>
+    <LinkTo @route="subsidy.index" class="au-c-button au-c-button--secondary" type="button">
+      <AuIcon @icon="arrow-left" @alignment="left"/>
+      Terug naar overzicht subsidie maatregels
+    </LinkTo>
+  </Group>
 </AuToolbar>
 
 <main id="main" class="au-c-main-container">
@@ -33,7 +39,8 @@
           <c.body as |series|>
             <td class="au-u-visible-medium-up au-u-word-break">
               <AuLink
-                
+                {{!-- @route="subsidy.application-steps"
+                @model={{series.id}} --}}
               >
                 {{series.title}} 
               </AuLink>
