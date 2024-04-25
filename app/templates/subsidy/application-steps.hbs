@@ -21,7 +21,7 @@
           {{#each this.model.activeApplicationFlow.sortedDefinedSteps as |step|}}
             {{#if step.subsidyProceduralStep.description}}
               <li class="au-c-panel au-o-box">
-                <AuHeading @skin="3">{{step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading>
+                <AuHeading @skin="3">{{this.indexToDisplay step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading>
                 {{#if step.formSpecification.filename}}
                   <AuHelpText @skin="secondary" class="au-u-margin-top-none">
                     {{moment-format step.deadline.begin "DD MMMM YYYY"}}
