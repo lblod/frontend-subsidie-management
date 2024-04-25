@@ -7,40 +7,44 @@
     </div>
   </Group>
   <Group>
-    <LinkTo @route="subsidy.measure-offer"{{this.model.subsidyMeasureOffer.id}} class="au-c-button au-c-button--secondary" type="button">
+    <AuButton class="au-c-button au-c-button--secondary" type="button" {{on "click" this.routeBack}}>
       <AuIcon @icon="arrow-left" @alignment="left"/>
       Terug naar {{this.model.subsidyMeasureOffer.title}} series
-    </LinkTo>
+    </AuButton>
   </Group>
 </AuToolbar>
 
-<main id="main" class="au-c-main-container">
+<AuBodyContainer @scroll={{true}}>
   <div class="au-c-main-container__content">
     <div class="au-c-body-container">
       {{#if this.model.activeApplicationFlow}}
-        {{#each
-          this.model.activeApplicationFlow.definedSteps
-          as |step|
-        }}
-          {{#if step.subsidyProceduralStep.description}}
-            <li class="au-c-list-navigation__item">
-              <li class="au-c-list-navigation__item">
-                <AuAccordion @buttonLabel={{step.subsidyProceduralStep.description}}>
-                  {{#if step.formSpecification.filename}}
-                    <li class="au-c-list-navigation__item">{{step.formSpecification.filename}}</li>
-                  {{else}}
-                    <AuLoader/>
-                  {{/if}}
-                </AuAccordion>
+          {{#each this.model.activeApplicationFlow.definedSteps as |step|}}
+            {{#if step.subsidyProceduralStep.description}}
+              <li class="au-c-panel au-o-box">
+                <AuHeading @skin="3">{{step.subsidyProceduralStep.description}}</AuHeading>
+                {{#if step.formSpecification.filename}}
+                  <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+                    {{#if (or step.deadline.begin step.deadline.end)}}
+                      {{moment-format step.deadline.begin "DD MMMM YYYY"}}
+                      &#8211;
+                      {{moment-format step.deadline.end "DD MMMM YYYY"}}
+                    {{else}}
+                      N.V.T.
+                    {{/if}}
+                  </AuHelpText>
+                  <div class="au-o-box">{{step.formSpecification.filename}}</div>
+                {{else}}
+                  <AuLoader/>
+                {{/if}}
               </li>
-            </li>
-          {{else}}
-            <AuLoader/>
-          {{/if}}
-        {{/each}}
+            {{else}}
+              <AuLoader/>
+            {{/if}}
+          {{/each}}
       {{else}}
         <AuLoader/>
       {{/if}}
     </div>
   </div>
-</main>
+</AuBodyContainer>
+
