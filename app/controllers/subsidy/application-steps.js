@@ -9,9 +9,4 @@ export default class SubsidyApplicationStepsController extends Controller {
   routeBack() {
     this.router.transitionTo('subsidy.measure-offer', this.model.subsidyMeasureOffer.id);
   }
-
-  indexToDisplay(index) {
-    // the order of the steps starts form 0
-    return index + 1;
-  }
 }
