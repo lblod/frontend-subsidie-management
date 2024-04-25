@@ -1,0 +1,46 @@
+{{page-title this.model.title}}
+<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
+  <Group>
+    <div>
+      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidiestappen voor "{{this.model.subsidyMeasureOffer.title}}": "{{this.model.title}}"</AuHeading>
+      <p>Hier vindt u de stappen voor {{this.model.title}}.</p>
+    </div>
+  </Group>
+  <Group>
+    <LinkTo @route="subsidy.measure-offer"{{this.model.subsidyMeasureOffer.id}} class="au-c-button au-c-button--secondary" type="button">
+      <AuIcon @icon="arrow-left" @alignment="left"/>
+      Terug naar {{this.model.subsidyMeasureOffer.title}} series
+    </LinkTo>
+  </Group>
+</AuToolbar>
+
+<main id="main" class="au-c-main-container">
+  <div class="au-c-main-container__content">
+    <div class="au-c-body-container">
+      {{#if this.model.activeApplicationFlow}}
+        {{#each
+          this.model.activeApplicationFlow.definedSteps
+          as |step|
+        }}
+          {{#if step.subsidyProceduralStep.description}}
+            <li class="au-c-list-navigation__item">
+              <li class="au-c-list-navigation__item">
+                <AuAccordion @buttonLabel={{step.subsidyProceduralStep.description}}>
+                  {{#if step.formSpecification.filename}}
+                    <li class="au-c-list-navigation__item">{{step.formSpecification.filename}}</li>
+                  {{else}}
+                    <AuLoader/>
+                  {{/if}}
+                </AuAccordion>
+              </li>
+            </li>
+          {{else}}
+            <AuLoader/>
+          {{/if}}
+        {{/each}}
+      {{else}}
+        <AuLoader/>
+      {{/if}}
+    </div>
+  </div>
+</main>
