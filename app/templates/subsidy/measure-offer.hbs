@@ -69,6 +69,28 @@
           </c.body>
         </t.content>
       </AuDataTable>
+
+      <p>Hier vindt u een overzicht van de criteria's voor {{this.model.title}}.</p>
+      <AuDataTable
+        @content={{this.model.criteria}}
+        @isLoading={{this.isLoadingModel}}
+        @noDataMessage="Geen criteria gevonden"
+        @sort={{this.sort}}
+        @page={{this.page}}
+        @size={{this.size}}
+        as |t|
+      >
+        <t.content as |c|>
+          <c.header>
+              <th colspan="1">criteria</th>
+          </c.header>
+          <c.body as |criteria|>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              {{criteria.name}}
+            </td>
+          </c.body>
+        </t.content>
+      </AuDataTable>
      </div>
   </div>
-</main>   
+</main>

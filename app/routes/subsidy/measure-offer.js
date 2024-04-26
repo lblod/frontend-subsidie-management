@@ -8,7 +8,7 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(DataTableRout
 
   async model({ id: measureOfferID }) {
     return await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
-      include: 'series',
+      include: 'series,criteria',
     });
   }
 }
