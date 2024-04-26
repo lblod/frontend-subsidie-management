@@ -43,13 +43,7 @@
                 @route="subsidy.application-steps"
                 @model={{series.id}}
               >
-                {{#if series.title}}
-                  {{series.title}}
-                {{else}}
-                  <AuHelpText>
-                    Geen titel
-                  </AuHelpText>
-                {{/if}} 
+                {{series.label}}
               </AuLink>
             </td>
             <td class="au-u-visible-medium-up au-u-word-break">
