@@ -1,0 +1,45 @@
+{{page-title this.model.title}}
+<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
+  <Group>
+    <div>
+      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidiestappen voor {{this.model.subsidyMeasureOffer.title}}: "{{this.model.label}}"</AuHeading>
+      <p>Hier vindt u de stappen voor {{this.model.label}}.</p>
+    </div>
+  </Group>
+  <Group>
+    <AuButton class="au-c-button au-c-button--secondary" type="button" {{on "click" this.routeBack}}>
+      <AuIcon @icon="arrow-left" @alignment="left"/>
+      Terug naar {{this.model.subsidyMeasureOffer.title}} series
+    </AuButton>
+  </Group>
+</AuToolbar>
+
+<AuBodyContainer @scroll={{true}}>
+  <div class="au-c-main-container__content">
+    <div class="au-c-body-container">
+      {{#if this.model.activeApplicationFlow}}
+          {{#each this.model.activeApplicationFlow.sortedDefinedSteps as |step|}}
+            {{#if step.subsidyProceduralStep.description}}
+              <li class="au-c-panel au-o-box">
+                <AuHeading @skin="3">{{step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading>
+                {{#if step.formSpecification.filename}}
+                  <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+                    {{moment-format step.deadline.begin "DD MMMM YYYY"}}
+                    &#8211;
+                    {{moment-format step.deadline.end "DD MMMM YYYY"}}
+                  </AuHelpText>
+                  <div class="au-o-box">{{step.formSpecification.filename}}</div>
+                {{else}}
+                  <AuLoader/>
+                {{/if}}
+              </li>
+            {{else}}
+              <AuLoader/>
+            {{/if}}
+          {{/each}}
+      {{else}}
+        <AuLoader/>
+      {{/if}}
+    </div>
+  </div>
+</AuBodyContainer>

@@ -34,16 +34,26 @@
                 @currentSorting={{this.sort}}
                 class="au-u-visible-medium-up"
               />
+              <th colspan="1">beschrijving</th>
               <th colspan="1">subsidie periode</th>
           </c.header>
           <c.body as |series|>
             <td class="au-u-visible-medium-up au-u-word-break">
               <AuLink
-                {{!-- @route="subsidy.application-steps"
-                @model={{series.id}} --}}
+                @route="subsidy.application-steps"
+                @model={{series.id}}
               >
-                {{series.title}} 
+                {{series.label}}
               </AuLink>
+            </td>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              {{#if series.description}}
+                {{series.description}}
+              {{else}}
+                <AuHelpText>
+                  Geen beschrijving gevonden
+                </AuHelpText>
+              {{/if}}
             </td>
             <td class="au-u-visible-medium-up au-u-word-break">
               <AuHelpText @skin="secondary" class="au-u-margin-top-none">
