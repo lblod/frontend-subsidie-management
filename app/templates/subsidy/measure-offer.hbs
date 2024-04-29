@@ -70,7 +70,12 @@
         </t.content>
       </AuDataTable>
 
-      <p>Hier vindt u een overzicht van de criteria's voor {{this.model.title}}.</p>
+      <AuToolbar @size="medium" as |Group|>
+        <Group>
+          <AuHeading @skin="6">Hier vindt u een overzicht van de criteria's voor {{this.model.title}}.</AuHeading>
+        </Group>
+      </AuToolbar>
+      
       <AuDataTable
         @content={{this.model.criteria}}
         @isLoading={{this.isLoadingModel}}
