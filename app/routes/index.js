@@ -5,7 +5,7 @@ export default class IndexRoute extends Route {
   @service session;
   @service router;
 
-  beforeModel(transition) {
+  beforeModel() {
     this.router.transitionTo('subsidy.index');
   }
 }

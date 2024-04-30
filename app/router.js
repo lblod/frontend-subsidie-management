@@ -1,5 +1,4 @@
 import EmberRouter from '@ember/routing/router';
-import { macroCondition, getOwnConfig } from '@embroider/macros';
 import config from 'frontend-subsidie-management/config/environment';
 
 export default class Router extends EmberRouter {
@@ -29,8 +28,8 @@ Router.map(function () {
 
   this.route('subsidy', function () {
     this.route('index');
-    this.route('measure-offer', { path:'subsidie-serie/:id'} );
-    this.route('application-steps', {path: 'application-steps/:id'});
+    this.route('measure-offer', { path: 'subsidie-serie/:id' });
+    this.route('application-steps', { path: 'application-steps/:id' });
   });
 
   this.route('route-not-found', {
