@@ -69,6 +69,32 @@
           </c.body>
         </t.content>
       </AuDataTable>
+
+      <AuToolbar @size="medium" as |Group|>
+        <Group>
+          <AuHeading @skin="6">Hier vindt u een overzicht van de criteria's die actief zijn op "{{this.model.title}}".</AuHeading>
+        </Group>
+      </AuToolbar>
+      <AuDataTable
+        @content={{this.model.criteria}}
+        @isLoading={{this.isLoadingModel}}
+        @noDataMessage="Geen criteria gevonden"
+        @sort={{this.sort}}
+        @page={{this.page}}
+        @size={{this.size}}
+        as |t|
+      >
+        <t.content as |c|>
+          <c.header>
+              <th colspan="1">criteria doelgroep</th>
+          </c.header>
+          <c.body as |criteria|>
+            <td class="au-u-visible-medium-up au-u-word-break">
+              {{criteria.name}}
+            </td>
+          </c.body>
+        </t.content>
+      </AuDataTable>
      </div>
   </div>
-</main>   
+</main>

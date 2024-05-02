@@ -14,7 +14,7 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(
       'subsidy-measure-offer',
       measureOfferID,
       {
-        include: 'series',
+        include: 'series,criteria',
       }
     );
   }

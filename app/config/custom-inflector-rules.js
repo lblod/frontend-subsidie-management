@@ -105,3 +105,6 @@ inflector.irregular(
 inflector.irregular('minister-position', 'minister-positions');
 
 inflector.irregular('nationality', 'nationalities');
+
+inflector.irregular('criteria', 'criterium');
+inflector.irregular('criteria', 'criterion');
