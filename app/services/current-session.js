@@ -1,7 +1,6 @@
 import Service, { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { setContext, setUser } from '@sentry/ember';
-import config from 'frontend-subsidie-management/config/environment';
 import { SHOULD_ENABLE_SENTRY } from 'frontend-subsidie-management/utils/sentry';
 
 export default class CurrentSessionService extends Service {
@@ -48,5 +47,4 @@ export default class CurrentSessionService extends Service {
       });
     }
   }
-
 }
