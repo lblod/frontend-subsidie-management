@@ -10,8 +10,12 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(
   @service store;
 
   async model({ id: measureOfferID }) {
-    return await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
-      include: 'series,criteria',
-    });
+    return await this.store.findRecord(
+      'subsidy-measure-offer',
+      measureOfferID,
+      {
+        include: 'series,criteria',
+      }
+    );
   }
 }
