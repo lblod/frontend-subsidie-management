@@ -13,8 +13,45 @@
     </LinkTo>
   </Group>
 </AuToolbar>
+<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
+  <Group>
+    <AuHeading @skin="3" >{{this.selected.label}}</AuHeading>
+  </Group>
+  {{log this.selected.label}}
+  <Group>
+    <PowerSelect
+      @placeholder="Subsidieserieshgvgvgv"
+      @onChange={{this.updateSelection}}
+      @selected={{this.selected}}
+      @options={{this.options}}
+      @loadingMessage="Aan het laden..."
+    as |serie|>
+      {{serie.label}}
+    </PowerSelect>
+  </Group>
+</AuToolbar>
+<AuTabs
+  class="au-u-padding-left-small au-u-padding-right-small"
+  @reversed={{this.reversed}}
+  as |Tab|
+>
+  <AuButtonGroup class="au-u-margin-left">
+      <Tab>
+        <AuLink @route="subsidy.index" @icon="sitemap">
+          Stappen
+        </AuLink>
+      </Tab>
+      <Tab>
+        <AuLink @route="subsidy.index" @icon="decided">
+          Criterions
+        </AuLink>
+      </Tab>
+  </AuButtonGroup>
+</AuTabs>
 
-<main id="main" class="au-c-main-container">
+
+
+{{!-- <main id="main" class="au-c-main-container">
   <div class="au-c-main-container__content">
     <div class="au-c-body-container">
       <AuDataTable
@@ -97,4 +134,4 @@
       </AuDataTable>
      </div>
   </div>
-</main>
+</main> --}}

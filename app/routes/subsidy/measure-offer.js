@@ -1,11 +1,8 @@
 /* eslint-disable ember/no-mixins */
 import Route from '@ember/routing/route';
-import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import { inject as service } from '@ember/service';
 
-export default class SubsidyMeasureOfferRoute extends Route.extend(
-  DataTableRouteMixin
-) {
+export default class SubsidyMeasureOfferRoute extends Route {
   @service currentSession;
   @service store;
 
@@ -17,5 +14,10 @@ export default class SubsidyMeasureOfferRoute extends Route.extend(
         include: 'series,criteria',
       }
     );
+  }
+  setupController(controller) {
+    super.setupController(...arguments);
+
+    controller.setup();
   }
 }
