@@ -17,7 +17,7 @@ export default class SubsidyMeasureOfferController extends Controller {
   @action
   async loadOptions() {
     this.options = await this.model.series;
-    this.latestSerie();
+    await this.latestSerie();
   }
 
   @action
@@ -30,18 +30,24 @@ export default class SubsidyMeasureOfferController extends Controller {
     this.router.transitionTo('subsidy.index');
   }
 
-  latestSerie() {
+  async latestSerie() {
     let latestSerie = null;
     let latestEndDate = null;
 
-    this.options.forEach((option) => {
-      const endDate = option.period.get('end');
-      const formattedEndDate = moment(endDate).format('YYYYMMDD');
-      if (!latestEndDate || formattedEndDate > latestEndDate) {
-        latestEndDate = formattedEndDate;
-        latestSerie = option;
-      }
-    });
+    await Promise.all(
+      this.options.map(async (option) => {
+        const period = await option.period;
+        if (period && period.end) {
+          const endDate = period.end;
+          const formattedEndDate = moment(endDate).format('YYYYMMDD');
+          if (!latestEndDate || formattedEndDate > latestEndDate) {
+            latestEndDate = formattedEndDate;
+            latestSerie = option;
+          }
+        }
+      })
+    );
+
     this.updateSelection(latestSerie);
   }
 }
