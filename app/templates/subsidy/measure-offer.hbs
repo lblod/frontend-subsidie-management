@@ -18,15 +18,33 @@
     <div>
       <AuHeading @skin="2" >{{this.selected.label}}</AuHeading>
       <AuHelpText>
-        {{#if (or this.selected.period.begin this.selected.period.end)}}
-          {{moment-format this.selected.period.begin "DD MMMM YYYY"}}
-            &#8211;
-          {{moment-format this.selected.period.end "DD MMMM YYYY"}}
+        {{#if this.selected.description}}
+          {{this.selected.description}}
         {{else}}
-          N.V.T.
+          Geen beschrijving gevonden
         {{/if}}
       </AuHelpText>
     </div>
+  </Group>
+  <Group class="au-o-box au-u-background-gray-100">
+    <span>Beschikbaar vanaf:</span>
+    <AuHeading @skin="4">
+      {{#if this.selected.period.begin}}
+        {{moment-format this.selected.period.begin "DD MMMM YYYY"}}
+      {{else}}
+        N.V.T.
+      {{/if}}
+    </AuHeading>
+  </Group>
+  <Group class="au-o-box au-u-background-gray-100">
+    <span>Beschikbaar tot:</span>
+    <AuHeading @skin="4">
+      {{#if this.selected.period.end}}
+        {{moment-format this.selected.period.end "DD MMMM YYYY"}}
+      {{else}}
+        N.V.T.
+      {{/if}}
+    </AuHeading>
   </Group>
   <Group class="serie-select">
     <PowerSelect
