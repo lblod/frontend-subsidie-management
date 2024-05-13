@@ -2,31 +2,43 @@
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
     <div>
-      <AuHeading @skin="2" data-test-loket="subsidiebeheer-page-title">Subsidieseries voor "{{this.model.title}}"</AuHeading>
+      <AuHeading @skin="1" data-test-loket="subsidiebeheer-page-title">Subsidieseries voor "{{this.model.title}}"</AuHeading>
       <p>Hier vindt u een overzicht van de series voor {{this.model.title}}.</p>
     </div>
   </Group>
   <Group>
-    <LinkTo @route="subsidy.index" class="au-c-button au-c-button--secondary" type="button">
+   <AuButton class="au-c-button au-c-button--secondary" type="button" {{on "click" this.routeBack}}>
       <AuIcon @icon="arrow-left" @alignment="left"/>
       Terug naar overzicht subsidie maatregels
-    </LinkTo>
+    </AuButton>
   </Group>
 </AuToolbar>
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
-    <AuHeading @skin="3" >{{this.selected.label}}</AuHeading>
+    <div>
+      <AuHeading @skin="2" >{{this.selected.label}}</AuHeading>
+      <AuHelpText>
+        {{#if (or this.selected.period.begin this.selected.period.end)}}
+          {{moment-format this.selected.period.begin "DD MMMM YYYY"}}
+            &#8211;
+          {{moment-format this.selected.period.end "DD MMMM YYYY"}}
+        {{else}}
+          N.V.T.
+        {{/if}}
+      </AuHelpText>
+    </div>
   </Group>
-  {{log this.selected.label}}
-  <Group>
+  <Group class="serie-select">
     <PowerSelect
-      @placeholder="Subsidieserieshgvgvgv"
       @onChange={{this.updateSelection}}
       @selected={{this.selected}}
       @options={{this.options}}
       @loadingMessage="Aan het laden..."
-    as |serie|>
-      {{serie.label}}
+      as |serie|
+    >
+      <span>
+        {{serie.label}}
+      </span>
     </PowerSelect>
   </Group>
 </AuToolbar>

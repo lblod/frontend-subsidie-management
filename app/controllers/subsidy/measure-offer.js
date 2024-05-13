@@ -1,36 +1,47 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import moment from 'moment';
+import { inject as service } from '@ember/service';
 
 export default class SubsidyMeasureOfferController extends Controller {
-  sort = '-modified';
-  page = 0;
-  size = 20;
+  @service router;
 
   @tracked selected = null;
   @tracked options = [];
 
-  setup() {
-    this.loadOptions()
-    // this.loadOptions();
-  }
-
-  updateSelection () {
-
-  }
-  @action
-  loadOptions() {
-    this.options = this.model.series.map(option => {
-      return {
-        id: option.id, // Assuming option has an id property
-        label: option.label  // Assuming option has a name property
-      };
-    });
-    console.log('Model in Controller:', this.options);
+  async setup() {
+    await this.loadOptions();
   }
 
   @action
-  updateSelection(option){
+  async loadOptions() {
+    this.options = await this.model.series;
+    this.latestSerie();
+  }
+
+  @action
+  updateSelection(option) {
     this.selected = option;
+  }
+
+  @action
+  routeBack() {
+    this.router.transitionTo('subsidy.index');
+  }
+
+  latestSerie() {
+    let latestSerie = null;
+    let latestEndDate = null;
+
+    this.options.forEach((option) => {
+      const endDate = option.period.get('end');
+      const formattedEndDate = moment(endDate).format('YYYYMMDD');
+      if (!latestEndDate || formattedEndDate > latestEndDate) {
+        latestEndDate = formattedEndDate;
+        latestSerie = option;
+      }
+    });
+    this.updateSelection(latestSerie);
   }
 }

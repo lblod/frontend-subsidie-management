@@ -1,1 +1,14 @@
 @import "@appuniversum/ember-appuniversum/styles";
+
+
+.serie-select {
+  display: inline-block;
+  width: 40%;
+  background-color: $au-white;
+  padding: 1rem 3rem;
+  justify-content: left;
+  span {
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+}
