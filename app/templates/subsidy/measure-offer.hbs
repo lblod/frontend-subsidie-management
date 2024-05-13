@@ -46,7 +46,7 @@
       {{/if}}
     </AuHeading>
   </Group>
-  <Group class="serie-select">
+  <Group class="au-o-box">
     <PowerSelect
       @onChange={{this.updateSelection}}
       @selected={{this.selected}}
@@ -58,6 +58,11 @@
         {{serie.label}}
       </span>
     </PowerSelect>
+  </Group>
+  <Group class="au-o-box">
+    <AuButton @disabled={{true}}>
+      Voeg een reeks toe
+    </AuButton>
   </Group>
 </AuToolbar>
 <AuTabs
