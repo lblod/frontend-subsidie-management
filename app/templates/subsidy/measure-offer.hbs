@@ -21,12 +21,12 @@
         {{#if this.selected.description}}
           {{this.selected.description}}
         {{else}}
-          Geen beschrijving gevonden
+          N.V.T
         {{/if}}
       </AuHelpText>
     </div>
   </Group>
-  <Group class="au-o-box au-u-background-gray-100">
+  <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
     <span>Beschikbaar vanaf:</span>
     <AuHeading @skin="4">
       {{#if this.selected.period.begin}}
@@ -36,7 +36,7 @@
       {{/if}}
     </AuHeading>
   </Group>
-  <Group class="au-o-box au-u-background-gray-100">
+  <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
     <span>Beschikbaar tot:</span>
     <AuHeading @skin="4">
       {{#if this.selected.period.end}}
