@@ -1,5 +1,29 @@
 {{page-title "Steps"}}
 
-<AuButton>test</AuButton>
+<AuBodyContainer @scroll={{true}}>
+  <div class="au-c-sidebar-container">
+    <div class="au-c-sidebar-container__sidebar">
+      <div class="au-c-sidebar">
+        <div class="au-c-sidebar-container__content">
+          {{#if this.model.activeApplicationFlow}}
+            <ul>
+              {{#each this.model.activeApplicationFlow.sortedDefinedSteps as |step|}}
+                {{#if step.subsidyProceduralStep.description}}
+                  <li class="au-c-panel au-o-box">
+                    <AuHeading @skin="4">{{step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading>
+                  </li>
+                {{else}}
+                  <AuLoader/>
+                {{/if}}
+              {{/each}}
+            </ul>
+          {{else}}
+            <AuLoader/>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</AuBodyContainer>
 
 {{outlet}}

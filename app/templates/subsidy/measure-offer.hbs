@@ -79,9 +79,13 @@
 >
   <AuButtonGroup class="au-u-margin-left">
       <Tab>
-        <AuLink @route="subsidy.measure-offer.steps" @icon="sitemap">
+        <AuButton
+          @icon="sitemap"
+          @skin="naked"
+          {{on "click" this.transitionToSteps}}
+        >
           Stappen
-        </AuLink>
+        </AuButton>
       </Tab>
       <Tab>
         <AuLink @route="subsidy.index" @icon="decided">
