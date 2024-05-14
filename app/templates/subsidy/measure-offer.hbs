@@ -3,8 +3,8 @@
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
     <div>
-      <AuHeading @skin="1" data-test-loket="subsidiebeheer-page-title">Subsidieseries voor "{{this.model.title}}"</AuHeading>
-      <p>Hier vindt u een overzicht van de series voor {{this.model.title}}.</p>
+      <AuHeading @skin="1" data-test-loket="subsidiebeheer-page-title">{{this.model.title}}</AuHeading>
+      <p>Hier vindt u een overzicht voor {{this.model.title}}.</p>
     </div>
   </Group>
   <Group>
@@ -79,7 +79,7 @@
 >
   <AuButtonGroup class="au-u-margin-left">
       <Tab>
-        <AuLink @route="subsidy.index" @icon="sitemap">
+        <AuLink @route="subsidy.measure-offer.steps" @icon="sitemap">
           Stappen
         </AuLink>
       </Tab>
@@ -90,6 +90,8 @@
       </Tab>
   </AuButtonGroup>
 </AuTabs>
+
+{{outlet}}
 
 
 
