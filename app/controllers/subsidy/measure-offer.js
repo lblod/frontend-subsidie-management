@@ -8,7 +8,6 @@ import { inject as service } from '@ember/service';
 export default class SubsidyMeasureOfferController extends Controller {
   @service router;
   @service store;
-  @tracked selectedId = null;
   @tracked selected = null;
   @tracked options = [];
   @tracked startDate;
@@ -32,7 +31,6 @@ export default class SubsidyMeasureOfferController extends Controller {
     );
     this.startDate = await this.startDateSeries(this.selected);
     this.endDate = await this.endDateSeries(this.selected);
-    this.selectedId = option.id;
 
     this.transitionToSteps();
   }
@@ -45,7 +43,7 @@ export default class SubsidyMeasureOfferController extends Controller {
   @action
   transitionToSteps() {
     this.router.transitionTo('subsidy.measure-offer.steps', {
-      queryParams: { selectedId: this.selectedId },
+      queryParams: { selectedId: this.selected.id },
     });
   }
 
