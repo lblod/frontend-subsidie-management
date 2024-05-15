@@ -29,8 +29,8 @@
   <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
     <span>Beschikbaar vanaf</span>
     <AuHeading @skin="4">
-      {{#if this.selected.period.begin}}
-        {{moment-format this.selected.period.begin "DD MMMM YYYY"}}
+      {{#if this.startDate}}
+        {{moment-format this.startDate "DD MMMM YYYY"}}
       {{else}}
         N.V.T.
       {{/if}}
@@ -39,8 +39,8 @@
   <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
     <span>Beschikbaar tot</span>
     <AuHeading @skin="4">
-      {{#if this.selected.period.end}}
-        {{moment-format this.selected.period.end "DD MMMM YYYY"}}
+      {{#if this.endDate}}
+        {{moment-format this.endDate "DD MMMM YYYY"}}
       {{else}}
         N.V.T.
       {{/if}}

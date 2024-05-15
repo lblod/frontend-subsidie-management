@@ -8,7 +8,13 @@ export default class SubsidyMeasureOfferRoute extends Route {
 
   async model(params) {
     return await this.store.findRecord('subsidy-measure-offer', params.id, {
-      include: 'series,criteria,series.period',
+      include: [
+        'series',
+        'criteria',
+        'series.period',
+        'series.active-application-flow.defined-steps',
+        'series.active-application-flow.defined-steps.subsidy-procedural-step',
+      ].join(','),
     });
   }
 

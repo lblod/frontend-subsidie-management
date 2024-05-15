@@ -9,6 +9,8 @@ export default class SubsidyMeasureOfferController extends Controller {
 
   @tracked selected = null;
   @tracked options = [];
+  @tracked startDate;
+  @tracked endDate;
 
   async setup() {
     await this.loadOptions();
@@ -21,8 +23,10 @@ export default class SubsidyMeasureOfferController extends Controller {
   }
 
   @action
-  updateSelection(option) {
+  async updateSelection(option) {
     this.selected = option;
+    this.startDate = await this.startDateSeries(this.selected);
+    this.endDate = await this.endDateSeries(this.selected);
   }
 
   @action
@@ -36,9 +40,8 @@ export default class SubsidyMeasureOfferController extends Controller {
 
     await Promise.all(
       this.options.map(async (option) => {
-        const period = await option.period;
-        if (period && period.end) {
-          const endDate = period.end;
+        const endDate = await this.endDateSeries(option);
+        if (endDate) {
           const formattedEndDate = moment(endDate).format('YYYYMMDD');
           if (!latestEndDate || formattedEndDate > latestEndDate) {
             latestEndDate = formattedEndDate;
@@ -49,5 +52,21 @@ export default class SubsidyMeasureOfferController extends Controller {
     );
 
     this.updateSelection(latestSerie);
+  }
+
+  // for the start date of the series we will look at the start date of the first step
+  async startDateSeries(series) {
+    const steps = await series.activeApplicationFlow.get('sortedDefinedSteps');
+    const periodFirstStep = await steps[0].subsidyProceduralStep.get('period');
+    return periodFirstStep.begin;
+  }
+
+  // for the end date of the series we will look at the end date of the latest step
+  async endDateSeries(series) {
+    const steps = await series.activeApplicationFlow.get('sortedDefinedSteps');
+    const periodLastStep = await steps[
+      steps.length - 1
+    ].subsidyProceduralStep.get('period');
+    return periodLastStep.end;
   }
 }
