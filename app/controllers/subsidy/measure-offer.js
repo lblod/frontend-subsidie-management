@@ -25,7 +25,10 @@ export default class SubsidyMeasureOfferController extends Controller {
 
   @action
   async updateSelection(option) {
-    this.selected = option;
+    this.selected = await this.store.peekRecord(
+      'subsidy-measure-offer-series',
+      option.id
+    );
     this.startDate = await this.startDateSeries(this.selected);
     this.endDate = await this.endDateSeries(this.selected);
   }
@@ -57,17 +60,22 @@ export default class SubsidyMeasureOfferController extends Controller {
 
   // for the start date of the series we will look at the start date of the first step
   async startDateSeries(series) {
-    const steps = await series.activeApplicationFlow.get('sortedDefinedSteps');
+    const steps = await series
+      .get('activeApplicationFlow')
+      .then((activeFlow) => {
+        return activeFlow.get('sortedDefinedSteps');
+      });
     const periodFirstStep = await steps[0].subsidyProceduralStep.get('period');
     return periodFirstStep.begin;
   }
 
   // for the end date of the series we will look at the end date of the latest step
   async endDateSeries(series) {
-    let seriesModel = await this.store.peekRecord('subsidy-measure-offer-series', series.id);
-    const steps = await seriesModel.get('activeApplicationFlow').then(activeFlow => {
-      return activeFlow.get('sortedDefinedSteps');
-    });
+    const steps = await series
+      .get('activeApplicationFlow')
+      .then((activeFlow) => {
+        return activeFlow.get('sortedDefinedSteps');
+      });
     const periodLastStep = await steps[
       steps.length - 1
     ].subsidyProceduralStep.get('period');
