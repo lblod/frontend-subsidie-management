@@ -1,4 +1,5 @@
 {{page-title this.model.title}}
+
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
     <div>
@@ -13,58 +14,64 @@
     </AuButton>
   </Group>
 </AuToolbar>
+
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
-  <Group>
-    <div>
-      <AuHeading @skin="2" >{{this.selected.label}}</AuHeading>
-      <AuHelpText>
-        {{#if this.selected.description}}
-          {{this.selected.description}}
+  {{#if this.setup.isRunning}}
+    <AuLoader />
+  {{else}}
+    <Group>
+      <div>
+        <AuHeading @skin="2" >{{this.selected.label}}</AuHeading>
+        <AuHelpText>
+          {{#if this.selected.description}}
+            {{this.selected.description}}
+          {{else}}
+            N.V.T
+          {{/if}}
+        </AuHelpText>
+      </div>
+    </Group>
+    <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
+      <span>Beschikbaar vanaf</span>
+      <AuHeading @skin="4">
+        {{#if this.startDate}}
+          {{moment-format this.startDate "DD MMMM YYYY"}}
         {{else}}
-          N.V.T
+          N.V.T.
         {{/if}}
-      </AuHelpText>
-    </div>
-  </Group>
-  <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
-    <span>Beschikbaar vanaf</span>
-    <AuHeading @skin="4">
-      {{#if this.startDate}}
-        {{moment-format this.startDate "DD MMMM YYYY"}}
-      {{else}}
-        N.V.T.
-      {{/if}}
-    </AuHeading>
-  </Group>
-  <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
-    <span>Beschikbaar tot</span>
-    <AuHeading @skin="4">
-      {{#if this.endDate}}
-        {{moment-format this.endDate "DD MMMM YYYY"}}
-      {{else}}
-        N.V.T.
-      {{/if}}
-    </AuHeading>
-  </Group>
-  <Group class="au-o-box">
-    <PowerSelect
-      @onChange={{this.updateSelection}}
-      @selected={{this.selected}}
-      @options={{this.options}}
-      @loadingMessage="Aan het laden..."
-      as |serie|
-    >
-      <span>
-        {{serie.label}}
-      </span>
-    </PowerSelect>
-  </Group>
-  <Group class="au-o-box">
-    <AuButton @disabled={{true}}>
-      Voeg een reeks toe
-    </AuButton>
-  </Group>
+      </AuHeading>
+    </Group>
+    <Group class="au-o-box au-u-flex au-u-flex--column au-u-background-gray-100">
+      <span>Beschikbaar tot</span>
+      <AuHeading @skin="4">
+        {{#if this.endDate}}
+          {{moment-format this.endDate "DD MMMM YYYY"}}
+        {{else}}
+          N.V.T.
+        {{/if}}
+      </AuHeading>
+    </Group>
+    <Group class="au-o-box">
+      <PowerSelect
+        @onChange={{this.updateSelection}}
+        @selected={{this.selected}}
+        @options={{this.options}}
+        @loadingMessage="Aan het laden..."
+        as |serie|
+      >
+        <span>
+          {{serie.label}}
+        </span>
+      </PowerSelect>
+    </Group>
+    <Group class="au-o-box">
+      <AuButton @disabled={{true}}>
+        Voeg een reeks toe
+      </AuButton>
+    </Group>
+  {{/if}}
 </AuToolbar>
+
 <AuTabs
   class="au-u-padding-left-small au-u-padding-right-small"
   @reversed={{this.reversed}}

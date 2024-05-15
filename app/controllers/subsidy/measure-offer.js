@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import moment from 'moment';
+import { restartableTask } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 
 export default class SubsidyMeasureOfferController extends Controller {
@@ -13,9 +14,9 @@ export default class SubsidyMeasureOfferController extends Controller {
   @tracked startDate;
   @tracked endDate;
 
-  async setup() {
+  setup = restartableTask(async () => {
     await this.loadOptions();
-  }
+  });
 
   @action
   async loadOptions() {
