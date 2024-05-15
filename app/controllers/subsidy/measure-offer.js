@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 
 export default class SubsidyMeasureOfferController extends Controller {
   @service router;
+  @service store;
 
   @tracked selected = null;
   @tracked options = [];
@@ -63,7 +64,10 @@ export default class SubsidyMeasureOfferController extends Controller {
 
   // for the end date of the series we will look at the end date of the latest step
   async endDateSeries(series) {
-    const steps = await series.activeApplicationFlow.get('sortedDefinedSteps');
+    let seriesModel = await this.store.peekRecord('subsidy-measure-offer-series', series.id);
+    const steps = await seriesModel.get('activeApplicationFlow').then(activeFlow => {
+      return activeFlow.get('sortedDefinedSteps');
+    });
     const periodLastStep = await steps[
       steps.length - 1
     ].subsidyProceduralStep.get('period');
