@@ -25,4 +25,9 @@ export default class SubsidyMeasureOfferStepsRoute extends Route {
     );
     return series;
   }
+
+  async setupController(controller) {
+    super.setupController(...arguments);
+    await controller.setup.perform();
+  }
 }
