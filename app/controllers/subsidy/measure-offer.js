@@ -47,6 +47,13 @@ export default class SubsidyMeasureOfferController extends Controller {
     });
   }
 
+  @action
+  transitionToCriteria() {
+    this.router.transitionTo('subsidy.measure-offer.criteria', {
+      queryParams: { selectedId: this.selected.id },
+    });
+  }
+
   async latestSerie() {
     let latestSerie = null;
     let latestEndDate = null;

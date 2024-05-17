@@ -88,9 +88,13 @@
         </AuButton>
       </Tab>
       <Tab>
-        <AuLink @route="subsidy.index" @icon="decided">
+        <AuButton
+          @icon="sitemap"
+          @skin="naked"
+          {{on "click" this.transitionToCriteria}}
+        >
           Criterions
-        </AuLink>
+        </AuButton>
       </Tab>
   </AuButtonGroup>
 </AuTabs>

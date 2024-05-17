@@ -30,6 +30,7 @@ Router.map(function () {
     this.route('index');
     this.route('measure-offer', { path: '/:id' }, function () {
       this.route('steps');
+      this.route('criteria');
     });
   });
 
