@@ -1,49 +1,62 @@
 {{page-title "Steps"}}
 
-<AuBodyContainer @scroll={{true}}>
-  <div class="sidebar-container">
-    <div class="sidebar-container__sidebar">
-      <div class="au-c-sidebar">
-        <div class="sidebar-container__content">
-          {{#if this.setup.isRunning}}
-            <AuLoader />
-          {{else}}
-            {{#if this.model.activeApplicationFlow}}
-              <ul>
+
+<AuBodyContainer id="content">
+  <SidebarContainer>
+    <:sidebar>
+        {{#if this.setup.isRunning}}
+          <AuLoader />
+        {{else}}
+          {{#if this.model.activeApplicationFlow}}
+            <nav>
+              <ul class="au-c-list-navigation">
                 {{#each this.model.activeApplicationFlow.sortedDefinedSteps as |step|}}
-                  {{#if step.subsidyProceduralStep.description}}
-                      <AuButton 
-                        @wrap="true"
-                        @skin="naked"
-                        @size="large"
-                        class="au-c-panel au-o-box sidebar-container__sidebar-button"
-                      >
-                        <AuHeading @skin="4">{{step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading>
-                        {{#if (this.isFirstStep step)}}
-                          <AuHelpText>
-                            Indienen vanaf {{moment-format step.deadline.begin "DD MMMM YYYY"}}
-                          </AuHelpText>
-                        {{/if}}
-                        {{#if (this.isLastStep step)}}
-                          <AuHelpText>
-                            Indienen tot {{moment-format step.deadline.end "DD MMMM YYYY"}}
-                          </AuHelpText>
-                        {{/if}}
-                      </AuButton>
-                    
-                  {{else}}
-                    <AuLoader/>
-                  {{/if}}
+                  <li class="au-c-list-navigation__item">
+                    {{#if step.subsidyProceduralStep.description}}
+                        <AuLink 
+                          class="au-c-list-navigation__link"
+                          style="flex-direction: column; align-items: start;"
+                          {{!template-lint-disable no-inline-styles}}
+                        >
+                        <div class="au-u-flex au-u-flex--spaced-tiny">
+                          <AuHeading @skin="4">{{step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading></div>
+                          {{#if (this.isFirstStep step)}}
+                            <AuHelpText
+                              @skin="secondary"
+                              @size="small"
+                              style="margin: 0; line-height:normal"
+                              {{!template-lint-disable no-inline-styles}}
+                            >
+                              Indienen vanaf {{moment-format step.deadline.begin "DD MMMM YYYY"}}
+                            </AuHelpText>
+                          {{/if}}
+                          {{#if (this.isLastStep step)}}
+                            <AuHelpText
+                              @skin="secondary"
+                              @size="small"
+                              style="margin: 0; line-height:normal"
+                              {{!template-lint-disable no-inline-styles}}
+                            >
+                              Indienen tot {{moment-format step.deadline.end "DD MMMM YYYY"}}
+                            </AuHelpText>
+                          {{/if}}
+                        </AuLink>
+                      
+                    {{else}}
+                      <AuLoader/>
+                    {{/if}}
+                  </li>
                 {{/each}}
               </ul>
-            {{else}}
-              <AuLoader/>
-            {{/if}}
+            </nav>
+          {{else}}
+            <AuLoader/>
           {{/if}}
-        </div>
-      </div>
-    </div>
-  </div>
+        {{/if}}
+      </:sidebar>
+    <:content>
+      {{outlet}}
+    </:content>
+  </SidebarContainer>
 </AuBodyContainer>
-
 {{outlet}}
