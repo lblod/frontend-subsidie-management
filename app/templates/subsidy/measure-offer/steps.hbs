@@ -1,0 +1,62 @@
+{{page-title "Steps"}}
+
+
+<AuBodyContainer id="content">
+  <SidebarContainer>
+    <:sidebar>
+        {{#if this.setup.isRunning}}
+          <AuLoader />
+        {{else}}
+          {{#if this.model.activeApplicationFlow}}
+            <nav>
+              <ul class="au-c-list-navigation">
+                {{#each this.model.activeApplicationFlow.sortedDefinedSteps as |step|}}
+                  <li class="au-c-list-navigation__item">
+                    {{#if step.subsidyProceduralStep.description}}
+                        <AuLink 
+                          class="au-c-list-navigation__link"
+                          style="flex-direction: column; align-items: start;"
+                          {{!template-lint-disable no-inline-styles}}
+                        >
+                        <div class="au-u-flex au-u-flex--spaced-tiny">
+                          <AuHeading @skin="4">{{step.subsidyProceduralStep.description}}</AuHeading></div>
+                          {{#if (this.isFirstStep step)}}
+                            <AuHelpText
+                              @skin="secondary"
+                              @size="small"
+                              style="margin: 0; line-height:normal"
+                              {{!template-lint-disable no-inline-styles}}
+                            >
+                              Indienen vanaf {{moment-format step.deadline.begin "DD MMMM YYYY"}}
+                            </AuHelpText>
+                          {{/if}}
+                          {{#if (this.isLastStep step)}}
+                            <AuHelpText
+                              @skin="secondary"
+                              @size="small"
+                              style="margin: 0; line-height:normal"
+                              {{!template-lint-disable no-inline-styles}}
+                            >
+                              Indienen tot {{moment-format step.deadline.end "DD MMMM YYYY"}}
+                            </AuHelpText>
+                          {{/if}}
+                        </AuLink>
+                      
+                    {{else}}
+                      <AuLoader/>
+                    {{/if}}
+                  </li>
+                {{/each}}
+              </ul>
+            </nav>
+          {{else}}
+            <AuLoader/>
+          {{/if}}
+        {{/if}}
+      </:sidebar>
+    <:content>
+      {{outlet}}
+    </:content>
+  </SidebarContainer>
+</AuBodyContainer>
+{{outlet}}

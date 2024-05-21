@@ -3,8 +3,8 @@
 <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
   <Group>
     <div>
-      <AuHeading @skin="1" data-test-loket="subsidiebeheer-page-title">Subsidieseries voor "{{this.model.title}}"</AuHeading>
-      <p>Hier vindt u een overzicht van de series voor {{this.model.title}}.</p>
+      <AuHeading @skin="1" data-test-loket="subsidiebeheer-page-title">{{this.model.title}}</AuHeading>
+      <p>Hier vindt u een overzicht voor {{this.model.title}}.</p>
     </div>
   </Group>
   <Group>
@@ -79,9 +79,13 @@
 >
   <AuButtonGroup class="au-u-margin-left">
       <Tab>
-        <AuLink @route="subsidy.index" @icon="sitemap">
+        <AuButton
+          @icon="sitemap"
+          @skin="naked"
+          {{on "click" this.transitionToSteps}}
+        >
           Stappen
-        </AuLink>
+        </AuButton>
       </Tab>
       <Tab>
         <AuLink @route="subsidy.index" @icon="decided">
@@ -91,89 +95,4 @@
   </AuButtonGroup>
 </AuTabs>
 
-
-
-{{!-- <main id="main" class="au-c-main-container">
-  <div class="au-c-main-container__content">
-    <div class="au-c-body-container">
-      <AuDataTable
-        @content={{this.model.series}}
-        @isLoading={{this.isLoadingModel}}
-        @noDataMessage="Geen periodes gevonden"
-        @sort={{this.sort}}
-        @page={{this.page}}
-        @size={{this.size}}
-        as |t|
-      >
-        <t.content as |c|>
-          <c.header>
-            <AuDataTableThSortable
-                @label="subsidie serie"
-                @field="label"
-                @currentSorting={{this.sort}}
-                class="au-u-visible-medium-up"
-              />
-              <th colspan="1">beschrijving</th>
-              <th colspan="1">subsidie periode</th>
-          </c.header>
-          <c.body as |series|>
-            <td class="au-u-visible-medium-up au-u-word-break">
-              <AuLink
-                @route="subsidy.application-steps"
-                @model={{series.id}}
-              >
-                {{series.label}}
-              </AuLink>
-            </td>
-            <td class="au-u-visible-medium-up au-u-word-break">
-              {{#if series.description}}
-                {{series.description}}
-              {{else}}
-                <AuHelpText>
-                  Geen beschrijving gevonden
-                </AuHelpText>
-              {{/if}}
-            </td>
-            <td class="au-u-visible-medium-up au-u-word-break">
-              <AuHelpText @skin="secondary" class="au-u-margin-top-none">
-                {{#if (or series.period.begin series.period.end)}}
-                  {{moment-format series.period.begin "DD MMMM YYYY"}}
-                    &#8211;
-                    {{moment-format series.period.end "DD MMMM YYYY"}}
-                  {{else}}
-                    N.V.T.
-                {{/if}}
-              </AuHelpText>
-            </td>
-          </c.body>
-        </t.content>
-      </AuDataTable>
-
-      <AuToolbar @size="medium" as |Group|>
-        <Group>
-          <AuHeading @skin="6">Hier vindt u een overzicht van de criteria's die actief zijn op "{{this.model.title}}".</AuHeading>
-        </Group>
-      </AuToolbar>
-      <AuDataTable
-        @content={{this.model.criteria}}
-        @isLoading={{this.isLoadingModel}}
-        @noDataMessage="Geen criteria gevonden"
-        @sort={{this.sort}}
-        @page={{this.page}}
-        @size={{this.size}}
-        as |t|
-      >
-        <t.content as |c|>
-          <c.header>
-              <th colspan="1">criteria doelgroep</th>
-          </c.header>
-          <c.body as |criteria|>
-            <td class="au-u-visible-medium-up au-u-word-break">
-              {{criteria.name}}
-            </td>
-          </c.body>
-        </t.content>
-      </AuDataTable>
-     </div>
-  </div>
-</main> --}}
+{{outlet}}
