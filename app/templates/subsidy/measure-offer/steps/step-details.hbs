@@ -1,5 +1,25 @@
 {{page-title "StepDetails"}}
+<div class="au-c-body-container au-c-body-container--scroll">
+  <div class="au-o-box">
+    {{#if this.setup.isRunning}}
+        <AuLoader />
+    {{else}}
+      <RdfForm
+        @groupClass="au-o-grid__item"
+        @form={{this.formNode}}
+        {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
+        @show={{true}}
+        @graphs={{this.graphs}}
+        @sourceNode={{this.sourceNode}}
+        @formStore={{this.formStore}}
+        @forceShowErrors={{this.forceShowErrors}}
+        @useNewListingLayout={{true}}
+        @level={{2}}
+        class="au-u-max-width-medium"
+      />
+    {{/if}}
+  </div>
+</div>
 
-  {{this.model.formSpecification.filename}}
 
 {{outlet}}

@@ -12,12 +12,32 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
   };
 
   async model(params) {
-    return await this.store.findRecord(
+    const step = await this.store.findRecord(
       'subsidy-application-flow-step',
       params.stepId,
       {
-        include: ['form-specification'].join(','),
+        include: ['form-specification', 'subsidy-procedural-step'].join(','),
       }
     );
+
+    const forms = await this.store.query('subsidy-application-form', {
+      filter: {
+        'subsidy-application-flow-step': {
+          ':id:': step.id,
+        },
+      },
+    });
+
+    const form = forms.at(0);
+
+    return {
+      step,
+      form,
+    };
+  }
+
+  async setupController(controller) {
+    super.setupController(...arguments);
+    await controller.setup.perform();
   }
 }
