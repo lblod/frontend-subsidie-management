@@ -12,6 +12,7 @@ const SOURCE_GRAPH = new NamedNode(`http://data.lblod.info/sourcegraph`);
 
 export default class SubsidyMeasureOfferStepsStepDetailsController extends Controller {
   @service store;
+  disableForm = true;
 
   graphs = {
     formGraph: FORM_GRAPH,
@@ -23,7 +24,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   formStore;
 
   setup = restartableTask(async () => {
-    await this.setupForm();
+    // await this.setupForm();
   });
 
   async setupForm() {
