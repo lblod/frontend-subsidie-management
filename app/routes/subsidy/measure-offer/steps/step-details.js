@@ -20,19 +20,19 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
       }
     );
 
-    const forms = await this.store.query('subsidy-application-form', {
-      filter: {
-        'subsidy-application-flow-step': {
-          ':id:': step.id,
-        },
-      },
-    });
+    // const forms = await this.store.query('subsidy-application-form', {
+    //   filter: {
+    //     'subsidy-application-flow-step': {
+    //       ':id:': step.id,
+    //     },
+    //   },
+    // });
 
-    const form = forms.at(0);
+    // const form = forms.at(0);
 
     return {
       step,
-      form,
+      // form,
     };
   }
 

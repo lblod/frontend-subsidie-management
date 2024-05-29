@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 import { ForkingStore } from '@lblod/ember-submission-form-fields';
 import { FORM, RDF } from '@lblod/submission-form-helpers';
 import { restartableTask } from 'ember-concurrency';
@@ -12,6 +13,10 @@ const SOURCE_GRAPH = new NamedNode(`http://data.lblod.info/sourcegraph`);
 
 export default class SubsidyMeasureOfferStepsStepDetailsController extends Controller {
   @service store;
+
+  @tracked startDate;
+  @tracked endDate;
+
   disableForm = true;
 
   graphs = {
@@ -24,6 +29,16 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   formStore;
 
   setup = restartableTask(async () => {
+    this.startDate = await this.model.step.subsidyProceduralStep
+      .get('period')
+      .then((period) => {
+        return period.begin;
+      });
+    this.endDate = await this.model.step.subsidyProceduralStep
+      .get('period')
+      .then((period) => {
+        return period.end;
+      });
     // await this.setupForm();
   });
 

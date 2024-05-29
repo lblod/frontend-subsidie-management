@@ -13,6 +13,16 @@
   }
 }
 
+.au-c-sidebar-container__datesidebar {
+  @include mq(medium) {
+    height: 100%;
+    flex-basis: 35rem;
+    flex-shrink: 0;
+  }
+}
+
+
+
 .au-c-sidebar-container__content {
   flex-basis: 100%;
   max-width: 100%;
@@ -23,4 +33,14 @@
     flex-basis: 0;
     flex-grow: 1;
   }
+}
+
+.au-o-grid__item--main {
+  flex: 1;
+  min-width: 0; /* Ensures the main content doesn't overflow */
+}
+
+.au-o-grid__item--sidebar {
+  width: 300px; /* Fixed width for sidebar, adjust as needed */
+  flex-shrink: 0; /* Prevents sidebar from shrinking */
 }
