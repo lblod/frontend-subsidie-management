@@ -2,61 +2,65 @@
   <div class="au-o-grid">
     <div class="au-o-grid__item au-o-grid__item--main">
       <div class="au-o-box">
-        {{#if this.disableForm}}
+        {{#if this.setup.isRunning}}
           <AuLoader />
         {{else}}
-          <RdfForm
-            @groupClass="au-o-grid__item"
-            @form={{this.formNode}}
-            {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
-            @show={{true}}
-            @graphs={{this.graphs}}
-            @sourceNode={{this.sourceNode}}
-            @formStore={{this.formStore}}
-            @forceShowErrors={{this.forceShowErrors}}
-            @useNewListingLayout={{true}}
-            @level={{2}}
-            class="au-u-max-width-medium"
-          />
+          {{#if this.form}}
+            <RdfForm
+              @groupClass="au-o-grid__item"
+              @form={{this.formNode}}
+              {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
+              @show={{true}}
+              @graphs={{this.graphs}}
+              @sourceNode={{this.sourceNode}}
+              @formStore={{this.formStore}}
+              @forceShowErrors={{this.forceShowErrors}}
+              @useNewListingLayout={{true}}
+              @level={{2}}
+              class="au-u-max-width-medium"
+            />
+          {{else}}
+            <AuHeading @skin="5" class="au-u-italic au-u-text-center">Geen formulier gevonden</AuHeading>
+          {{/if}}
         {{/if}}
       </div>
     </div>
 
-      <div class="au-c-sidebar-container__datesidebar">
-        <div class="au-c-sidebar">
-          <div class="au-c-body-container au-c-body-container--scroll">
-            <div class="au-o-box">
-              {{#if this.setup.isRunning}}
-                <AuLoader />
+    <div class="au-c-sidebar-container__datesidebar">
+      <div class="au-c-sidebar">
+        <div class="au-c-body-container au-c-body-container--scroll">
+          <div class="au-o-box">
+            {{#if this.setup.isRunning}}
+              <AuLoader />
+            {{else}}
+            <AuHeading @skin="2">Datum</AuHeading>
+            <AuHeading @skin="5">Beschikbaar vanaf</AuHeading>
+            <AuHeading @skin="3" class="au-o-box au-u-margin-bottom">
+              {{#if this.startDate}}
+                {{moment-format this.startDate "DD MMMM YYYY"}}
               {{else}}
-              <AuHeading @skin="2">Datum</AuHeading>
-              <AuHeading @skin="5">Beschikbaar vanaf</AuHeading>
-              <AuHeading @skin="3" class="au-o-box au-u-margin-bottom">
-                {{#if this.startDate}}
-                  {{moment-format this.startDate "DD MMMM YYYY"}}
-                {{else}}
-                  N.V.T.
-                {{/if}}
-              </AuHeading>
-            
-              <AuHeading @skin="5">Beschikbaar tot</AuHeading>
-              <AuHeading @skin="3" class="au-o-box au-u-margin-bottom">
-                {{#if this.endDate}}
-                  {{moment-format this.endDate "DD MMMM YYYY"}}
-                {{else}}
-                  N.V.T.
-                {{/if}}
-              </AuHeading>
+                N.V.T.
               {{/if}}
-              <AuButton
-                class="au-o-box--tiny au-u-flex-center"
-                @size="large"
-                @disabled={{true}}
-              >
-                Datum aanpassen
-              </AuButton>
-            </div>
+            </AuHeading>
+          
+            <AuHeading @skin="5">Beschikbaar tot</AuHeading>
+            <AuHeading @skin="3" class="au-o-box au-u-margin-bottom">
+              {{#if this.endDate}}
+                {{moment-format this.endDate "DD MMMM YYYY"}}
+              {{else}}
+                N.V.T.
+              {{/if}}
+            </AuHeading>
+            {{/if}}
+            <AuButton
+              class="au-o-box--tiny au-u-flex-center"
+              @size="large"
+              @disabled={{true}}
+            >
+              Datum aanpassen
+            </AuButton>
           </div>
+        </div>
       </div>
     </div>
   </div>

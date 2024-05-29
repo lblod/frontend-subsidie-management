@@ -16,6 +16,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
 
   @tracked startDate;
   @tracked endDate;
+  @tracked form;
 
   disableForm = true;
 
@@ -39,34 +40,34 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       .then((period) => {
         return period.end;
       });
-    // await this.setupForm();
+    await this.setupForm();
   });
 
   async setupForm() {
-    let form = await this.model.form;
+    this.form = await this.model.form;
+    if (this.form) {
+      this.formStore = new ForkingStore();
+      this.formNode = this.formStore.any(
+        undefined,
+        RDF('type'),
+        FORM('Form'),
+        FORM_GRAPH
+      );
 
-    this.formStore = new ForkingStore();
-    this.formNode = this.formStore.any(
-      undefined,
-      RDF('type'),
-      FORM('Form'),
-      FORM_GRAPH
-    );
+      await this.retrieveForm(
+        `/management-application-forms/${this.form.id}`,
+        this.formStore,
+        this.graphs
+      );
 
-    await this.retrieveForm(
-      `/management-application-forms/${form.id}`,
-      this.formStore,
-      this.graphs
-    );
-
-    this.formNode = this.formStore.any(
-      undefined,
-      RDF('type'),
-      FORM('Form'),
-      FORM_GRAPH
-    );
-    this.sourceNode = new NamedNode(form.get('uri'));
-    console.log(this.sourceNode);
+      this.formNode = this.formStore.any(
+        undefined,
+        RDF('type'),
+        FORM('Form'),
+        FORM_GRAPH
+      );
+      this.sourceNode = new NamedNode(this.form.get('uri'));
+    }
   }
 
   async retrieveForm(url, store, graphs) {
