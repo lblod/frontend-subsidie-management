@@ -44,21 +44,23 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   });
 
   async setupForm() {
-    this.form = await this.model.form;
-    if (this.form) {
-      this.formStore = new ForkingStore();
-      this.formNode = this.formStore.any(
-        undefined,
-        RDF('type'),
-        FORM('Form'),
-        FORM_GRAPH
-      );
+    let form = await this.model.formSpecification;
 
-      await this.retrieveForm(
-        `/management-application-forms/${this.form.id}`,
-        this.formStore,
-        this.graphs
-      );
+    this.formStore = new ForkingStore();
+    this.formNode = this.formStore.any(
+      undefined,
+      RDF('type'),
+      FORM('Form'),
+      FORM_GRAPH
+    );
+
+    console.log(form.get('downloadLink'));
+
+    await this.retrieveForm(
+      form.get('downloadLink'),
+      this.formStore,
+      this.graphs
+    );
 
       this.formNode = this.formStore.any(
         undefined,
