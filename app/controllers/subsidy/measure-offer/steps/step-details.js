@@ -54,10 +54,10 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       FORM_GRAPH
     );
 
-    console.log(form.get('downloadLink'));
+    console.log(form.get('uri'));
 
     await this.retrieveForm(
-      form.get('downloadLink'),
+      `/management-form-file?filename=${form.get('filename')}`,
       this.formStore,
       this.graphs
     );
@@ -86,9 +86,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       );
       return;
     }
-    const content = await response.json();
-    store.parse(content.form, graphs.formGraph, 'text/turtle');
-    store.parse(content.meta, graphs.metaGraph, 'text/turtle');
-    store.parse(content.source, graphs.sourceGraph, 'text/turtle');
+    const content = await response.text();
+    store.parse(content, graphs.formGraph, 'text/turtle');
   }
 }
