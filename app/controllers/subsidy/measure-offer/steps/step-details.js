@@ -54,22 +54,21 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       FORM_GRAPH
     );
 
-    console.log(form.get('uri'));
-
     await this.retrieveForm(
-      `/management-form-file?filename=${form.get('filename')}`,
+      `/management-form-file?filename=${encodeURIComponent(
+        form.get('filename')
+      )}`,
       this.formStore,
       this.graphs
     );
 
-      this.formNode = this.formStore.any(
-        undefined,
-        RDF('type'),
-        FORM('Form'),
-        FORM_GRAPH
-      );
-      this.sourceNode = new NamedNode(this.form.get('uri'));
-    }
+    this.formNode = this.formStore.any(
+      undefined,
+      RDF('type'),
+      FORM('Form'),
+      FORM_GRAPH
+    );
+    this.sourceNode = new NamedNode(form.get('uri'));
   }
 
   async retrieveForm(url, store, graphs) {
