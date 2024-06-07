@@ -44,6 +44,7 @@ export default class SubsidyMeasureOfferController extends Controller {
   @action
   transitionToSteps() {
     this.selectedTab = 'steps';
+    console.log(this.selected.id);
     this.router.transitionTo('subsidy.measure-offer.steps', this.selected.id);
   }
 
