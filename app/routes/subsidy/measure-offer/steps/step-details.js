@@ -21,11 +21,11 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
   @service currentSession;
   @service store;
 
-  queryParams = {
-    stepId: {
-      refreshModel: true,
-    },
-  };
+  // queryParams = {
+  //   stepId: {
+  //     refreshModel: true,
+  //   },
+  // };
 
   constructor() {
     super(...arguments);
@@ -33,10 +33,10 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
     this.registerTableFields();
   }
 
-  async model(params) {
+  async model({ step_id: stepID }) {
     return await this.store.findRecord(
       'subsidy-application-flow-step',
-      params.stepId,
+      stepID,
       {
         include: ['form-specification', 'subsidy-procedural-step'].join(','),
       }

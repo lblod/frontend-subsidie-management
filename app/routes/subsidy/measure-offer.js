@@ -6,8 +6,8 @@ export default class SubsidyMeasureOfferRoute extends Route {
   @service currentSession;
   @service store;
 
-  async model(params) {
-    return await this.store.findRecord('subsidy-measure-offer', params.id, {
+  async model({ id: measureOfferID }) {
+    return await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
       include: [
         'series',
         'criteria',
