@@ -7,15 +7,19 @@ export default class SubsidyMeasureOfferRoute extends Route {
   @service store;
 
   async model({ id: measureOfferID }) {
-    return await this.store.findRecord('subsidy-measure-offer', measureOfferID, {
-      include: [
-        'series',
-        'criteria',
-        'series.period',
-        'series.active-application-flow.defined-steps',
-        'series.active-application-flow.defined-steps.subsidy-procedural-step',
-      ].join(','),
-    });
+    return await this.store.findRecord(
+      'subsidy-measure-offer',
+      measureOfferID,
+      {
+        include: [
+          'series',
+          'criteria',
+          'series.period',
+          'series.active-application-flow.defined-steps',
+          'series.active-application-flow.defined-steps.subsidy-procedural-step',
+        ].join(','),
+      }
+    );
   }
 
   async setupController(controller) {

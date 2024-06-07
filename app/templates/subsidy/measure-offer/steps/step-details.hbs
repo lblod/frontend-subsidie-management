@@ -5,7 +5,6 @@
         {{#if this.setup.isRunning}}
           <AuLoader />
         {{else}}
-          {{#if this.form}}
             <RdfForm
               @groupClass="au-o-grid__item"
               @form={{this.formNode}}
@@ -19,9 +18,6 @@
               @level={{2}}
               class="au-u-max-width-medium"
             />
-          {{else}}
-            <AuHeading @skin="5" class="au-u-italic au-u-text-center">Geen formulier gevonden</AuHeading>
-          {{/if}}
         {{/if}}
       </div>
     </div>

@@ -44,15 +44,14 @@ export default class SubsidyMeasureOfferController extends Controller {
   @action
   transitionToSteps() {
     this.selectedTab = 'steps';
-    this.router.transitionTo('subsidy.measure-offer.steps', 
-      this.selected.id
-    );
+    this.router.transitionTo('subsidy.measure-offer.steps', this.selected.id);
   }
 
   @action
   transitionToCriteria() {
     this.selectedTab = 'criteria';
-    this.router.transitionTo('subsidy.measure-offer.criteria', 
+    this.router.transitionTo(
+      'subsidy.measure-offer.criteria',
       this.selected.id
     );
   }

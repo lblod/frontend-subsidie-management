@@ -18,8 +18,6 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked endDate;
   @tracked form;
 
-  disableForm = true;
-
   graphs = {
     formGraph: FORM_GRAPH,
     metaGraph: META_GRAPH,
@@ -30,12 +28,12 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   formStore;
 
   setup = restartableTask(async () => {
-    this.startDate = await this.model.step.subsidyProceduralStep
+    this.startDate = await this.model.subsidyProceduralStep
       .get('period')
       .then((period) => {
         return period.begin;
       });
-    this.endDate = await this.model.step.subsidyProceduralStep
+    this.endDate = await this.model.subsidyProceduralStep
       .get('period')
       .then((period) => {
         return period.end;
