@@ -22,8 +22,9 @@ export default class SubsidyMeasureOfferStepsController extends Controller {
 
   @action
   transitionToDetails(step) {
-    this.router.transitionTo('subsidy.measure-offer.steps.step-details', 
-      step.id,
+    this.router.transitionTo(
+      'subsidy.measure-offer.steps.step-details',
+      step.id
     );
   }
 
