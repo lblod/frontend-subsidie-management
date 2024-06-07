@@ -33,30 +33,30 @@
             {{#if this.setup.isRunning}}
               <AuLoader />
             {{else}}
-              <AuHeading @skin="2">Datum</AuHeading>
 
+              <AuHeading class="au-u-margin-top-small" @skin="3">Datum</AuHeading>
               <div class="au-o-box--small">
                 <AuHeading @skin="5">Beschikbaar vanaf</AuHeading>
-                <AuHeading @skin="3">
+                <p>
                   {{#if this.startDate}}
                     {{moment-format this.startDate "DD MMMM YYYY"}}
                   {{else}}
                     N.V.T.
                   {{/if}}
-                </AuHeading>
+                </p>
               </div>
               <div class="au-o-box--small">
                 <AuHeading @skin="5">Beschikbaar tot</AuHeading>
-                <AuHeading @skin="3">
+                <p>
                   {{#if this.endDate}}
                     {{moment-format this.endDate "DD MMMM YYYY"}}
                   {{else}}
                     N.V.T.
                   {{/if}}
-                </AuHeading>
+                </p>
               </div>
             {{/if}}
-              <div class="au-o-box--small">
+              <div class="au-o-box--small au-u-flex au-u-flex--center">
                 <AuButton
                   @size="large"
                   @disabled={{true}}
@@ -67,7 +67,7 @@
           </div>
           {{!-- in the future we want to see who managed the subsidy step --}}
           <div class="au-o-box">
-              <AuHeading @skin="2">Metadata</AuHeading>
+            <AuHeading @skin="3">Metadata</AuHeading>
             <div class="au-o-box--small">
               <AuHeading @skin="5">Aangemaakt op</AuHeading>
               <AuHelpText @size="large">/</AuHelpText>
