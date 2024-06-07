@@ -21,12 +21,6 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
   @service currentSession;
   @service store;
 
-  // queryParams = {
-  //   stepId: {
-  //     refreshModel: true,
-  //   },
-  // };
-
   constructor() {
     super(...arguments);
 

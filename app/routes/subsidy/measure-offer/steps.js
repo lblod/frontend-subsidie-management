@@ -5,12 +5,6 @@ export default class SubsidyMeasureOfferStepsRoute extends Route {
   @service currentSession;
   @service store;
 
-  // queryParams = {
-  //   selectedId: {
-  //     refreshModel: true,
-  //   },
-  // };
-
   async model({ series_id: seriesID }) {
     const series = await this.store.findRecord(
       'subsidy-measure-offer-series',
