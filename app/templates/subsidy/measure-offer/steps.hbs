@@ -1,6 +1,3 @@
-{{page-title "Steps"}}
-
-
 <AuBodyContainer id="content">
   <SidebarContainer>
     <:sidebar>
@@ -16,6 +13,8 @@
                         <AuLink 
                           class="au-c-list-navigation__link"
                           style="flex-direction: column; align-items: start;"
+                          {{!-- @route="subsidy.measure-offer.steps.step-details" --}}
+                          {{on "click" (fn this.transitionToDetails step)}}
                           {{!template-lint-disable no-inline-styles}}
                         >
                         <div class="au-u-flex au-u-flex--spaced-tiny">
@@ -25,6 +24,7 @@
                               @skin="secondary"
                               @size="small"
                               style="margin: 0; line-height:normal"
+                              
                               {{!template-lint-disable no-inline-styles}}
                             >
                               Indienen vanaf {{moment-format step.deadline.begin "DD MMMM YYYY"}}
@@ -59,4 +59,4 @@
     </:content>
   </SidebarContainer>
 </AuBodyContainer>
-{{outlet}}
+

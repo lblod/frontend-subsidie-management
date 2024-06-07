@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   height: 100%;
   overflow: hidden;
+  border-style: solid;
 }
 
 .au-c-sidebar-container__sidebar {
@@ -11,6 +12,22 @@
     flex-basis: 25rem;
     flex-shrink: 0;
   }
+}
+
+.au-c-sidebar-container__datesidebar {
+  height: 100%;
+  flex-basis: 35rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: $au-gray-100;
+  border-style: solid;
+  border-left-width: 1px;
+  border-color: $au-gray-200;
+}
+
+.au-o-grid__item--main {
+  flex: 1;
+  min-width: 0; 
 }
 
 .au-c-sidebar-container__content {

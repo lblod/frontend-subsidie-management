@@ -1,0 +1,94 @@
+<div class="au-c-body-container au-c-body-container--scroll">
+  <div class="au-o-grid">
+    <div class="au-o-grid__item au-o-grid__item--main">
+      <div class="au-o-box ">
+        {{#if this.setup.isRunning}}
+          <AuLoader />
+        {{else}}
+          {{#if this.form}}
+            <RdfForm
+              @groupClass="au-o-grid__item"
+              @form={{this.formNode}}
+              {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
+              @show={{true}}
+              @graphs={{this.graphs}}
+              @sourceNode={{this.sourceNode}}
+              @formStore={{this.formStore}}
+              @forceShowErrors={{this.forceShowErrors}}
+              @useNewListingLayout={{true}}
+              @level={{2}}
+              class="au-u-max-width-medium"
+            />
+          {{else}}
+            <AuHeading @skin="5" class="au-u-italic au-u-text-center">Geen formulier gevonden</AuHeading>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="au-c-sidebar-container__datesidebar">
+      <div class="au-c-sidebar">
+        <div class="au-c-body-container au-c-body-container--scroll">
+          <div class="au-o-box au-u-margin-bottom">
+            {{#if this.setup.isRunning}}
+              <AuLoader />
+            {{else}}
+
+              <AuHeading class="au-u-margin-top-small" @skin="3">Datum</AuHeading>
+              <div class="au-o-box--small">
+                <AuHeading @skin="5">Beschikbaar vanaf</AuHeading>
+                <p>
+                  {{#if this.startDate}}
+                    {{moment-format this.startDate "DD MMMM YYYY"}}
+                  {{else}}
+                    N.V.T.
+                  {{/if}}
+                </p>
+              </div>
+              <div class="au-o-box--small">
+                <AuHeading @skin="5">Beschikbaar tot</AuHeading>
+                <p>
+                  {{#if this.endDate}}
+                    {{moment-format this.endDate "DD MMMM YYYY"}}
+                  {{else}}
+                    N.V.T.
+                  {{/if}}
+                </p>
+              </div>
+            {{/if}}
+              <div class="au-o-box--small au-u-flex au-u-flex--center">
+                <AuButton
+                  @size="large"
+                  @disabled={{true}}
+                >
+                  Datum aanpassen
+                </AuButton>
+              </div>
+          </div>
+          {{!-- in the future we want to see who managed the subsidy step --}}
+          <div class="au-o-box">
+            <AuHeading @skin="3">Metadata</AuHeading>
+            <div class="au-o-box--small">
+              <AuHeading @skin="5">Aangemaakt op</AuHeading>
+              <AuHelpText @size="large">/</AuHelpText>
+            </div>
+            <div class="au-o-box--small">
+              <AuHeading @skin="5">Laatst gewijzigd</AuHeading>
+              <AuHelpText @size="large">/</AuHelpText>
+            </div>
+            <div class="au-o-box--small">
+              <AuHeading @skin="5">Aangemaakt door</AuHeading>
+              <AuHelpText @size="large">/</AuHelpText>
+            </div>
+            <div class="au-o-box--small">
+              <AuHeading @skin="5">Laatst gewijzigd door</AuHeading>
+              <AuHelpText @size="large">/</AuHelpText>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{outlet}}
