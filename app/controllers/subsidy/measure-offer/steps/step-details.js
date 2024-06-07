@@ -17,15 +17,15 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked startDate;
   @tracked endDate;
   @tracked form;
+  @tracked sourceNode;
+  @tracked formNode;
+  @tracked formStore;
 
   graphs = {
     formGraph: FORM_GRAPH,
     metaGraph: META_GRAPH,
     sourceGraph: SOURCE_GRAPH,
   };
-  sourceNode;
-  formNode;
-  formStore;
 
   setup = restartableTask(async () => {
     this.startDate = await this.model.subsidyProceduralStep
@@ -66,6 +66,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       FORM('Form'),
       FORM_GRAPH
     );
+    console.log(this.formNode);
     this.sourceNode = new NamedNode(form.get('uri'));
   }
 
