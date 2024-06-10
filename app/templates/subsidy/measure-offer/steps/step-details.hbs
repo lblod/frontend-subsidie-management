@@ -5,6 +5,9 @@
         {{#if this.setup.isRunning}}
           <AuLoader />
         {{else}}
+          {{#if this.isExternallyProcessed}}
+            <p class="au-u-text-center">Subsidy is external</p>
+          {{else}}
             <RdfForm
               @groupClass="au-o-grid__item"
               @form={{this.formNode}}
@@ -18,6 +21,7 @@
               @level={{2}}
               class="au-u-max-width-medium"
             />
+          {{/if}}
         {{/if}}
       </div>
     </div>

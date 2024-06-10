@@ -20,6 +20,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked sourceNode;
   @tracked formNode;
   @tracked formStore;
+  @tracked isExternallyProcessed;
 
   graphs = {
     formGraph: FORM_GRAPH,
@@ -28,20 +29,24 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   };
 
   setup = restartableTask(async () => {
-    this.startDate = await this.model.subsidyProceduralStep
+    const subsidyProceduralStep = await this.model.subsidyProceduralStep;
+    this.isExternallyProcessed = subsidyProceduralStep.isExternallyProcessed;
+
+    this.startDate = await subsidyProceduralStep
       .get('period')
       .then((period) => {
         return period.begin;
       });
-    this.endDate = await this.model.subsidyProceduralStep
-      .get('period')
-      .then((period) => {
-        return period.end;
-      });
+    this.endDate = await subsidyProceduralStep.get('period').then((period) => {
+      return period.end;
+    });
     await this.setupForm();
   });
 
   async setupForm() {
+    // If the subsidy is externally processed, there is no form to be retrieved
+    if (this.isExternallyProcessed) return;
+
     let form = await this.model.formSpecification;
 
     this.formStore = new ForkingStore();
