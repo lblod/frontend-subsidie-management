@@ -37,18 +37,15 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       .then((period) => {
         return period.begin;
       });
-    this.endDate = await subsidyProceduralStep
-      .get('period')
-      .then((period) => {
-        return period.end;
-      });
+    this.endDate = await subsidyProceduralStep.get('period').then((period) => {
+      return period.end;
+    });
     await this.setupForm();
   });
 
   async setupForm() {
     // If the subsidy is externally processed, there is no form to be retrieved
-    if(this.isExternallyProcessed)
-      return;
+    if (this.isExternallyProcessed) return;
 
     let form = await this.model.formSpecification;
 
