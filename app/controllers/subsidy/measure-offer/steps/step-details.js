@@ -17,25 +17,23 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked startDate;
   @tracked endDate;
   @tracked form;
-
-  disableForm = true;
+  @tracked sourceNode;
+  @tracked formNode;
+  @tracked formStore;
 
   graphs = {
     formGraph: FORM_GRAPH,
     metaGraph: META_GRAPH,
     sourceGraph: SOURCE_GRAPH,
   };
-  sourceNode;
-  formNode;
-  formStore;
 
   setup = restartableTask(async () => {
-    this.startDate = await this.model.step.subsidyProceduralStep
+    this.startDate = await this.model.subsidyProceduralStep
       .get('period')
       .then((period) => {
         return period.begin;
       });
-    this.endDate = await this.model.step.subsidyProceduralStep
+    this.endDate = await this.model.subsidyProceduralStep
       .get('period')
       .then((period) => {
         return period.end;
@@ -44,30 +42,31 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   });
 
   async setupForm() {
-    this.form = await this.model.form;
-    if (this.form) {
-      this.formStore = new ForkingStore();
-      this.formNode = this.formStore.any(
-        undefined,
-        RDF('type'),
-        FORM('Form'),
-        FORM_GRAPH
-      );
+    let form = await this.model.formSpecification;
 
-      await this.retrieveForm(
-        `/management-application-forms/${this.form.id}`,
-        this.formStore,
-        this.graphs
-      );
+    this.formStore = new ForkingStore();
+    this.formNode = this.formStore.any(
+      undefined,
+      RDF('type'),
+      FORM('Form'),
+      FORM_GRAPH
+    );
 
-      this.formNode = this.formStore.any(
-        undefined,
-        RDF('type'),
-        FORM('Form'),
-        FORM_GRAPH
-      );
-      this.sourceNode = new NamedNode(this.form.get('uri'));
-    }
+    await this.retrieveForm(
+      `/management-form-file?filename=${encodeURIComponent(
+        form.get('filename')
+      )}`,
+      this.formStore,
+      this.graphs
+    );
+
+    this.formNode = this.formStore.any(
+      undefined,
+      RDF('type'),
+      FORM('Form'),
+      FORM_GRAPH
+    );
+    this.sourceNode = new NamedNode(form.get('uri'));
   }
 
   async retrieveForm(url, store, graphs) {
@@ -84,9 +83,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       );
       return;
     }
-    const content = await response.json();
-    store.parse(content.form, graphs.formGraph, 'text/turtle');
-    store.parse(content.meta, graphs.metaGraph, 'text/turtle');
-    store.parse(content.source, graphs.sourceGraph, 'text/turtle');
+    const content = await response.text();
+    store.parse(content, graphs.formGraph, 'text/turtle');
   }
 }

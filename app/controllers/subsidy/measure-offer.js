@@ -15,6 +15,7 @@ export default class SubsidyMeasureOfferController extends Controller {
   @tracked selectedTab = 'steps';
 
   setup = restartableTask(async () => {
+    this.selected = null;
     await this.loadOptions();
   });
 
@@ -44,17 +45,12 @@ export default class SubsidyMeasureOfferController extends Controller {
   @action
   transitionToSteps() {
     this.selectedTab = 'steps';
-    this.router.transitionTo('subsidy.measure-offer.steps', {
-      queryParams: { selectedId: this.selected.id },
-    });
+    this.router.transitionTo('subsidy.measure-offer.steps', this.selected.id);
   }
 
   @action
   transitionToCriteria() {
     this.selectedTab = 'criteria';
-    this.router.transitionTo('subsidy.measure-offer.criteria', {
-      queryParams: { selectedId: this.selected.id },
-    });
   }
 
   async latestSerie() {

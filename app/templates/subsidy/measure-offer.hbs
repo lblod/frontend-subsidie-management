@@ -15,10 +15,10 @@
   </Group>
 </AuToolbar>
 
-<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" class={{if (eq this.selectedTab "criteria") "au-u-hidden-visually"}} as |Group|>
-  {{#if this.setup.isRunning}}
-    <AuLoader />
-  {{else}}
+{{#if this.setup.isRunning}}
+  <AuLoader />
+{{else}}
+  <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" class={{if (eq this.selectedTab "criteria") "au-u-hidden-visually"}} as |Group|> 
     <Group>
       <div>
         <AuHeading @skin="2" >{{this.selected.label}}</AuHeading>
@@ -69,7 +69,7 @@
         Voeg een reeks toe
       </AuButton>
     </Group>
-  {{/if}}
+  
 </AuToolbar>
 
 <AuTabs
@@ -82,8 +82,8 @@
         <AuLink
           @icon="sitemap"
           @route="subsidy.measure-offer.steps"
+          @model={{this.selected.id}}
           {{on "click" this.transitionToSteps}}
-          class={{if (eq this.selectedTab "steps") "au-c-button--selected"}}
         >
           Stappen
         </AuLink>
@@ -99,5 +99,5 @@
       </Tab>
   </AuButtonGroup>
 </AuTabs>
-
+{{/if}}
 {{outlet}}
