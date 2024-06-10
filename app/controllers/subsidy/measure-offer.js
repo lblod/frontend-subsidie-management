@@ -15,6 +15,7 @@ export default class SubsidyMeasureOfferController extends Controller {
   @tracked selectedTab = 'steps';
 
   setup = restartableTask(async () => {
+    this.selected = null;
     await this.loadOptions();
   });
 
