@@ -66,7 +66,6 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       FORM('Form'),
       FORM_GRAPH
     );
-    console.log(this.formNode);
     this.sourceNode = new NamedNode(form.get('uri'));
   }
 
