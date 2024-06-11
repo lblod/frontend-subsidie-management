@@ -58,8 +58,7 @@
             {{/if}}
               <div class="au-o-box--small au-u-flex au-u-flex--center">
                 <AuButton
-                  @size="large"
-                  @disabled={{true}}
+                  {{on "click" (fn (mut this.showDateModal) true)}}
                 >
                   Datum aanpassen
                 </AuButton>
@@ -91,4 +90,32 @@
   </div>
 </div>
 
-{{outlet}}
+
+<AuModal
+  @modalOpen={{this.showDateModal}}
+  @closeModal={{fn (mut this.showDateModal) false}}
+>
+  <:title>Datum voor "{{this.model.subsidyProceduralStep.description}}" aanpassen.</:title>
+  <:body>
+    <div>
+      <div class="au-o-box">
+        <AuDatePicker
+          @label="startdatum"
+        /> 
+      </div>
+      <div class="au-o-box">
+        <AuDatePicker
+          @label="einddatum"
+        /> 
+      </div>
+    </div>
+  </:body>
+  <:footer>
+    <AuButton
+      {{on "click" (fn (mut this.showDateModal) false)}}
+    >
+      Aanpassing bewaren
+    </AuButton>
+  </:footer>
+</AuModal>
+

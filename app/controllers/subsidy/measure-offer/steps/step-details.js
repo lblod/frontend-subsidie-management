@@ -21,6 +21,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked formNode;
   @tracked formStore;
   @tracked isExternallyProcessed;
+  @tracked showDateModal = false;
 
   graphs = {
     formGraph: FORM_GRAPH,
