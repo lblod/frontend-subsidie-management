@@ -36,7 +36,7 @@ export default class SubsidyMeasureOfferController extends Controller {
     this.startDate = await this.startDateSeries(this.selected);
     this.endDate = await this.endDateSeries(this.selected);
 
-    this.transitionToSteps();
+    await this.transitionToSteps();
   }
 
   @action
@@ -45,7 +45,7 @@ export default class SubsidyMeasureOfferController extends Controller {
   }
 
   @action
-  transitionToSteps() {
+  async transitionToSteps() {
     this.selectedTab = 'steps';
     this.router.transitionTo('subsidy.measure-offer.steps', this.selected.id);
   }
