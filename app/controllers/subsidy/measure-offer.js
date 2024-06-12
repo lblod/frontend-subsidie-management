@@ -91,12 +91,10 @@ export default class SubsidyMeasureOfferController extends Controller {
     await activeFlow.get('definedSteps'); // first fetch the definedSteps for less issues
     const steps = await activeFlow.get('sortedDefinedSteps');
 
-    const lastStep = await steps[
-      steps.length - 1
-    ]
-    const lastProceduralStep = await lastStep.subsidyProceduralStep
+    const lastStep = await steps[steps.length - 1];
+    const lastProceduralStep = await lastStep.subsidyProceduralStep;
     const periodLastStep = await lastProceduralStep.get('period');
-    if(periodLastStep === undefined) return null;
+    if (periodLastStep === undefined) return null;
     return periodLastStep.end;
   }
 }
