@@ -26,4 +26,8 @@ export default class SubsidyMeasureOfferRoute extends Route {
     super.setupController(...arguments);
     await controller.setup.perform();
   }
+
+  resetController() {
+    super.resetController(...arguments);
+  }
 }
