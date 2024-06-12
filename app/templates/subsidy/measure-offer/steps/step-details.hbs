@@ -6,21 +6,25 @@
           <AuLoader />
         {{else}}
           {{#if this.isExternallyProcessed}}
-            <p class="au-u-text-center">Subsidy is external</p>
+            <p class="au-u-text-center">Deze subsidie is extern</p>
           {{else}}
-            <RdfForm
-              @groupClass="au-o-grid__item"
-              @form={{this.formNode}}
-              {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
-              @show={{true}}
-              @graphs={{this.graphs}}
-              @sourceNode={{this.sourceNode}}
-              @formStore={{this.formStore}}
-              @forceShowErrors={{this.forceShowErrors}}
-              @useNewListingLayout={{true}}
-              @level={{2}}
-              class="au-u-max-width-medium"
-            />
+            {{#if this.formFound}}
+              <RdfForm
+                @groupClass="au-o-grid__item"
+                @form={{this.formNode}}
+                {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
+                @show={{true}}
+                @graphs={{this.graphs}}
+                @sourceNode={{this.sourceNode}}
+                @formStore={{this.formStore}}
+                @forceShowErrors={{this.forceShowErrors}}
+                @useNewListingLayout={{true}}
+                @level={{2}}
+                class="au-u-max-width-medium"
+              />
+            {{else}}
+              <p class="au-u-text-center">Geen formulier gevonden voor deze stap</p>
+            {{/if}}
           {{/if}}
         {{/if}}
       </div>
