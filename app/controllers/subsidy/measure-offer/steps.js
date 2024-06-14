@@ -40,6 +40,6 @@ export default class SubsidyMeasureOfferStepsController extends Controller {
   };
 
   async sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
