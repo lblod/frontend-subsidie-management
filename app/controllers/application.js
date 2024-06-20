@@ -6,7 +6,7 @@ export default class ApplicationController extends Controller {
   @service() currentSession;
   @service() router;
 
-  appTitle = 'Subsidie Management';
+  appTitle = 'Subsidiemanagement';
 
   get isIndex() {
     return this.router.currentRouteName === 'index';

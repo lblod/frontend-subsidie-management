@@ -21,6 +21,7 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked formNode;
   @tracked formStore;
   @tracked isExternallyProcessed;
+  @tracked formFound;
 
   graphs = {
     formGraph: FORM_GRAPH,
@@ -90,5 +91,6 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
     }
     const content = await response.text();
     store.parse(content, graphs.formGraph, 'text/turtle');
+    this.formFound = true;
   }
 }

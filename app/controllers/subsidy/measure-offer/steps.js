@@ -17,11 +17,14 @@ export default class SubsidyMeasureOfferStepsController extends Controller {
 
     this.firstStep = steps[0];
     this.lastStep = steps[steps.length - 1];
-    this.transitionToDetails(this.lastStep);
+    // Sleep 500ms to wait for the previous transition to finish
+    // Rewrite to combine the 2 transitionto's into 1 to avoid this issue
+    await this.sleep(500);
+    await this.transitionToDetails(this.lastStep);
   });
 
   @action
-  transitionToDetails(step) {
+  async transitionToDetails(step) {
     this.router.transitionTo(
       'subsidy.measure-offer.steps.step-details',
       step.id
@@ -35,4 +38,8 @@ export default class SubsidyMeasureOfferStepsController extends Controller {
   isLastStep = (step) => {
     return step === this.lastStep;
   };
+
+  async sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 }
