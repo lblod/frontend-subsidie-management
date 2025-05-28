@@ -4,11 +4,12 @@ export default class ParticipationModel extends Model {
   @attr description;
   @attr role;
 
-  @belongsTo('bestuurseenheid', {
+  @belongsTo('organization', {
     async: true,
-    inverse: null,
+    polymorphic: true,
+    inverse: 'participations',
   })
-  participatingBestuurseenheid;
+  participatingOrganization;
 }
 
 export const ROLES = {

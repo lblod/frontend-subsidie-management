@@ -1,13 +1,3 @@
-import Model, { attr } from '@ember-data/model';
+import OrganizationClassificationCodeModel from './organization-classification-code';
 
-export default class BestuurseenheidClassificatieCodeModel extends Model {
-  @attr label;
-  @attr scopeNote;
-  @attr uri;
-
-  rdfaBindings = {
-    class: 'http://www.w3.org/2004/02/skos/core#Concept',
-    label: 'http://www.w3.org/2004/02/skos/core#prefLabel',
-    scopeNote: 'http://www.w3.org/2004/02/skos/core#scopeNote',
-  };
-}
+export default class BestuurseenheidClassificatieCodeModel extends OrganizationClassificationCodeModel {}
