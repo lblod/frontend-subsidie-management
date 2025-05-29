@@ -1,88 +1,24 @@
 {{page-title this.model.title}}
 
-<AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" as |Group|>
+<AuToolbar @size="medium" @border="bottom" as |Group|>
   <Group>
-    <div>
-      <AuHeading @skin="1" data-test-loket="subsidiebeheer-page-title">{{this.model.title}}</AuHeading>
-      <p>Hier vindt u een overzicht van de subsidie '{{this.model.title}}'.</p>
-    </div>
+    <ul class="au-c-list-horizontal au-c-list-horizontal--small">
+      <li class="au-c-list-horizontal__item">
+        <AuLink @route="index" @icon="arrow-left">
+          Overzicht subsidiemaatregelen
+        </AuLink>
+      </li>
+      <li class="au-c-list-horizontal__item">
+        {{this.model.title}}
+      </li>
+      <li class="au-c-list-horizontal__item">
+        {{this.selected.label}}
+      </li>
+    </ul>
   </Group>
   <Group>
-   <AuButton class="au-c-button au-c-button--secondary" type="button" {{on "click" this.routeBack}}>
-      <AuIcon @icon="arrow-left" @alignment="left"/>
-      Terug naar overzicht subsidie maatregels
-    </AuButton>
-  </Group>
-</AuToolbar>
-
-{{#if this.setup.isRunning}}
-  <AuLoader />
-{{else}}
-  <AuTabs
-    class="au-u-padding-left-small au-u-padding-right-small"
-    @reversed={{this.reversed}}
-    as |Tab|
-  >
-    <AuButtonGroup class="au-u-margin-left">
-        <Tab>
-          <AuLink
-            @icon="sitemap"
-            @route="subsidy.measure-offer.steps"
-            @model={{this.selected.id}}
-            {{on "click" this.transitionToSteps}}
-          >
-            Stappen
-          </AuLink>
-        </Tab>
-        <Tab>
-          <AuLink
-            @icon="decided"
-            @route="subsidy.measure-offer.criteria"
-            {{on "click" this.transitionToCriteria}}
-          >
-            Criterions
-          </AuLink>
-        </Tab>
-    </AuButtonGroup>
-  </AuTabs>
-
-  <AuToolbar @border="bottom" @size="large" @nowrap="{{true}}" class={{if (eq this.selectedTab "criteria") "au-u-hidden-visually"}} as |Group|>
-    <Group>
-      <div>
-        <AuHeading @skin="2" >{{this.selected.label}}</AuHeading>
-        <AuHelpText>
-          {{#if this.selected.description}}
-            {{this.selected.description}}
-          {{else}}
-            N.V.T
-          {{/if}}
-        </AuHelpText>
-      </div>
-    </Group>
-    <Group class="au-u-padding-small au-u-padding-left au-u-padding-right au-u-flex au-u-flex--column au-u-flex--center au-u-flex-self-center au-u-background-gray-100">
-      <span>Beschikbaar vanaf</span>
-      <span class="au-u-bold au-u-margin-left-none">
-        {{#if this.startDate}}
-          {{moment-format this.startDate "DD MMMM YYYY"}}
-        {{else}}
-          N.V.T.
-        {{/if}}
-      </span>
-    </Group>
-    <Group class="au-u-padding-small au-u-padding-left au-u-padding-right au-u-flex au-u-flex--column au-u-flex--center au-u-flex-self-center au-u-background-gray-100">
-      <span>Beschikbaar tot</span>
-      <span class="au-u-bold au-u-margin-left-none">
-        {{#if this.endDate}}
-          {{moment-format this.endDate "DD MMMM YYYY"}}
-        {{else}}
-          N.V.T.
-        {{/if}}
-      </span>
-    </Group>
-    {{!-- template-lint-disable no-inline-styles --}}
-    <Group class="au-o-box" style="width: 300px;">
       <PowerSelect
-        style="width: 300px; text-wrap: nowrap;"
+        style="width: 200px; text-wrap: nowrap;"
         @onChange={{this.updateSelection}}
         @selected={{this.selected}}
         @options={{this.options}}
@@ -93,12 +29,24 @@
           {{serie.label}}
         </span>
       </PowerSelect>
+      <AuDropdown
+        @title="Instellingen"
+        @alignment="left"
+        @skin="primary"
+        @icon="settings"
+        @iconAlignment="left"
+      >
+        <AuButton @skin="link" @icon="switch" role="menuitem" @disabled={{true}}>
+          Voeg een reeks toe
+        </AuButton>
+        <AuButton
+          @skin="link" @icon="switch" role="menuitem"
+          @disabled={{true}}
+        >
+          Datum aanpassen
+        </AuButton>
+      </AuDropdown>
     </Group>
-    <Group class="au-o-box">
-      <AuButton @disabled={{true}}>
-        Voeg een reeks toe
-      </AuButton>
-    </Group>
-  </AuToolbar>
-{{/if}}
+</AuToolbar>
+
 {{outlet}}

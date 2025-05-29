@@ -89,8 +89,12 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
     ]);
   }
 
-  async setupController(controller) {
-    super.setupController(...arguments);
+  async setupController(controller, model) {
+    super.setupController(controller, model);
+
+    // Access the measure-offer model from the parent route
+    let measureOfferModel = this.modelFor('subsidy.measure-offer');
+    controller.set('measureOfferModel', measureOfferModel);
     await controller.setup.perform();
   }
 }

@@ -1,25 +1,29 @@
-<AuBodyContainer id="content">
-  <SidebarContainer>
+<AuBodyContainer id="content" class=" au-u-background-gray-100" style="overflow-y: scroll; position: relative; height: 100%; padding: 35px 0;">
+  <SidebarContainer style="position: sticky; top: 0; height: auto;" >
     <:sidebar>
+      <div style="padding: 20px; padding-top: 0;" >
         {{#if this.setup.isRunning}}
           <AuLoader />
         {{else}}
           {{#if this.model.activeApplicationFlow}}
-            <nav>
-              <ul class="au-c-list-navigation">
+            <nav style="padding: 10px; padding-top: 0; border: 1px solid lightgray; border-radius: 10px; background-color: white;">
+              <AuHeading class="au-u-margin-top-small" @skin="4">Stappen</AuHeading>
+
+              
+              <ul class="au-c-list-navigation ">
                 {{#each this.model.activeApplicationFlow.sortedDefinedSteps as |step|}}
                   <li class="au-c-list-navigation__item">
                     {{#if step.subsidyProceduralStep.description}}
                         <AuLink 
-                          class="au-c-list-navigation__link"
-                          style="flex-direction: column; align-items: start;"
+                          class="au-c-list-navigation__link au-u-margin-top-small au-u-background-gray-100 "
+                          style="flex-direction: column; align-items: start; border-radius: 5px; border: 1px solid lightgray;"
                           @route="subsidy.measure-offer.steps.step-details"
                           @model={{step.id}}
                           {{!-- {{on "click" (fn this.transitionToDetails step)}} --}}
                           {{!template-lint-disable no-inline-styles}}
                         >
                         <div class="au-u-flex au-u-flex--spaced-tiny">
-                          <AuHeading @skin="4">{{step.subsidyProceduralStep.description}}</AuHeading></div>
+                          <AuHeading @skin="6">{{step.subsidyProceduralStep.description}}</AuHeading></div>
                           {{#if (this.isFirstStep step)}}
                             <AuHelpText
                               @skin="secondary"
@@ -54,10 +58,10 @@
             <AuLoader/>
           {{/if}}
         {{/if}}
-      </:sidebar>
+      </div>
+    </:sidebar>
     <:content>
       {{outlet}}
     </:content>
   </SidebarContainer>
 </AuBodyContainer>
-

@@ -1,93 +1,95 @@
 <div class="au-c-sidebar-container">
-<AuBodyContainer @scroll={{true}}>
-  <div class="au-o-box">
-    {{#if this.setup.isRunning}}
-      <AuLoader />
-    {{else}}
-      {{#if this.isExternallyProcessed}}
-        <p class="au-u-text-center">Deze subsidie is extern</p>
+  <AuBodyContainer @scroll={{true}} style="background-color: white; border-radius: 10px; border: 1px solid lightgray; padding: 20px; overflow: hidden;">
+    <div class="au-o-box" >
+      <AuHeading class="au-u-margin-bottom" @skin="2" data-test-loket="subsidiebeheer-page-title">{{this.measureOfferModel.title}}</AuHeading>
+
+      {{#if this.setup.isRunning}}
+        <AuLoader />
       {{else}}
-        {{#if this.formFound}}
-          <RdfForm
-            @groupClass="au-o-grid__item"
-            @form={{this.formNode}}
-            {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
-            @show={{true}}
-            @graphs={{this.graphs}}
-            @sourceNode={{this.sourceNode}}
-            @formStore={{this.formStore}}
-            @forceShowErrors={{this.forceShowErrors}}
-            @useNewListingLayout={{true}}
-            @level={{2}}
-            class="au-u-max-width-medium"
-          />
+        {{#if this.isExternallyProcessed}}
+          <p class="au-u-text-center">Deze subsidie is extern</p>
         {{else}}
-          <p class="au-u-text-center">Geen formulier gevonden voor deze stap</p>
+          {{#if this.formFound}}
+            <RdfForm
+              @groupClass="au-o-grid__item"
+              @form={{this.formNode}}
+              {{!-- Show is used to switch between 'edit' and 'show' state, setting this to true makes the forms readonly --}}
+              @show={{true}}
+              @graphs={{this.graphs}}
+              @sourceNode={{this.sourceNode}}
+              @formStore={{this.formStore}}
+              @forceShowErrors={{this.forceShowErrors}}
+              @useNewListingLayout={{true}}
+              @level={{2}}
+              class="au-u-max-width-medium"
+            />
+          {{else}}
+            <p class="au-u-text-center">Geen formulier gevonden voor deze stap</p>
+          {{/if}}
         {{/if}}
       {{/if}}
-    {{/if}}
-  </div>
-</AuBodyContainer>
+    </div>
+  </AuBodyContainer>
 
-<div class="au-c-sidebar-container__datesidebar">
-  <div class="au-c-sidebar">
-    <div class="au-c-sidebar__content">
-      <div class="au-o-box au-u-margin-bottom">
-        {{#if this.setup.isRunning}}
-          <AuLoader />
-        {{else}}
-          <AuHeading class="au-u-margin-top-small" @skin="3">Datum</AuHeading>
-          <div class="au-o-box--small">
-            <AuHeading @skin="5">Beschikbaar vanaf</AuHeading>
-            <p>
-              {{#if this.startDate}}
-                {{moment-format this.startDate "DD MMMM YYYY"}}
-              {{else}}
-                N.V.T.
-              {{/if}}
-            </p>
-          </div>
-          <div class="au-o-box--small">
-            <AuHeading @skin="5">Beschikbaar tot</AuHeading>
-            <p>
-              {{#if this.endDate}}
-                {{moment-format this.endDate "DD MMMM YYYY"}}
-              {{else}}
-                N.V.T.
-              {{/if}}
-            </p>
-          </div>
-        {{/if}}
-        <div class="au-o-box--small au-u-flex au-u-flex--center">
-          <AuButton
-            @size="large"
-            @disabled={{true}}
-          >
-            Datum aanpassen
-          </AuButton>
-        </div>
-      </div>
-      <div class="au-o-box">
-        <AuHeading @skin="3">Metadata</AuHeading>
-        <div class="au-o-box--small">
-          <AuHeading @skin="5">Aangemaakt op</AuHeading>
-          <AuHelpText @size="large">/</AuHelpText>
-        </div>
-        <div class="au-o-box--small">
-          <AuHeading @skin="5">Laatst gewijzigd</AuHeading>
-          <AuHelpText @size="large">/</AuHelpText>
-        </div>
-        <div class="au-o-box--small">
-          <AuHeading @skin="5">Aangemaakt door</AuHeading>
-          <AuHelpText @size="large">/</AuHelpText>
-        </div>
-        <div class="au-o-box--small">
-          <AuHeading @skin="5">Laatst gewijzigd door</AuHeading>
-          <AuHelpText @size="large">/</AuHelpText>
+  <div class="au-c-sidebar-container__datesidebar" >
+    <div class="au-c-sidebar">
+      <div class="au-c-sidebar__content">
+        <div class="au-o-box au-u-margin-bottom">
+          {{#if this.setup.isRunning}}
+            <AuLoader />
+          {{else}}
+            <div class="au-u-margin-top-small">
+              <AuHeading class="au-u-margin-top-small" @skin="3">Reeks</AuHeading>
+              <div class="au-u-margin-top-small">
+                <AuHeading @skin="5">Naam</AuHeading>
+                <p>
+                  {{this.model.series.label}}
+                </p>
+              </div>
+              <div class="au-u-margin-top-small">
+                <AuHeading @skin="5">Status</AuHeading>
+                <p>
+                  <AuPill>Actief</AuPill>
+                </p>
+              </div>
+            </div>
+            <div class="au-u-margin-top-large">
+              <AuHeading class="au-u-margin-top-small" @skin="3">Datum</AuHeading>
+              <div class="au-u-margin-top-small">
+                <AuHeading @skin="5">Beschikbaar vanaf</AuHeading>
+                <p>
+                  {{#if this.startDate}}
+                    {{moment-format this.startDate "DD MMMM YYYY"}}
+                  {{else}}
+                    N.V.T.
+                  {{/if}}
+                </p>
+              </div>
+              <div class="au-u-margin-top-small">
+                <AuHeading @skin="5">Beschikbaar tot</AuHeading>
+                <p>
+                  {{#if this.endDate}}
+                    {{moment-format this.endDate "DD MMMM YYYY"}}
+                  {{else}}
+                    N.V.T.
+                  {{/if}}
+                </p>
+              </div>
+            </div>
+            <div class="au-u-margin-top-large">
+              <AuHeading class="au-u-margin-top-small" @skin="3">Criterions</AuHeading>
+              <div class="au-u-margin-top-small">
+                {{#each this.criteria as |criterion|}}
+                  <div style="font-weight: 500; background-color: white; border: 1px solid lightgray; border-radius: 10px; padding: 8px 15px; margin-bottom: 8px;">
+                    {{remove-prefix criterion.name "Subsidiemaatregelaanbod:"}}
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 

@@ -23,6 +23,10 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @tracked isExternallyProcessed;
   @tracked formFound;
 
+  get criteria() {
+    return this.measureOfferModel.criteria;
+  }
+
   graphs = {
     formGraph: FORM_GRAPH,
     metaGraph: META_GRAPH,

@@ -28,6 +28,18 @@
                 @currentSorting={{this.sort}}
                 class="au-u-visible-medium-up"
               />
+              <AuDataTableThSortable
+                @label="Aantal reeksen"
+                @field="label"
+                @currentSorting={{this.sort}}
+                class="au-u-visible-medium-up"
+              />
+              <AuDataTableThSortable
+                @label="Criteria"
+                @field="criteria"
+                @currentSorting={{this.sort}}
+                class="au-u-visible-medium-up"
+              />
           </c.header>
           <c.body as |subsidyMeasureOffer|>
             <td class="au-u-visible-medium-up au-u-word-break">
@@ -38,6 +50,16 @@
                 {{subsidyMeasureOffer.title}} 
               </AuLink>
             </td>
+            <td>
+              <AuPill @skin="ongoing">{{subsidyMeasureOffer.series.length}}</AuPill>
+            </td>
+          
+            <td class="au-u-visible-medium-up au-u-word-break">
+              {{#each subsidyMeasureOffer.criteria as |criterion|}}
+                <AuPill @skin="ongoing" style="margin-bottom: 5px;">{{remove-prefix criterion.name "Subsidiemaatregelaanbod: doelgroep "}}</AuPill>
+              {{/each}}
+            </td>
+          
           </c.body>
         </t.content>
       </AuDataTable>
