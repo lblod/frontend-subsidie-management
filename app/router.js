@@ -32,7 +32,6 @@ Router.map(function () {
       this.route('steps', { path: '/:series_id' }, function () {
         this.route('step-details', { path: '/:step_id' });
       });
-      this.route('criteria');
     });
   });
 
