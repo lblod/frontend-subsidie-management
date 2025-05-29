@@ -9,4 +9,10 @@ export default class SubsidyMeasureOfferModel extends Model {
     inverse: 'subsidyMeasureOffer',
   })
   series;
+
+  @hasMany('criterion', {
+    async: true,
+    inverse: null,
+  })
+  criteria;
 }
