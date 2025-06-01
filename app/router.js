@@ -28,9 +28,9 @@ Router.map(function () {
 
   this.route('subsidy', function () {
     this.route('index');
-    this.route('measure-offer', { path: '/:id' }, function () {
-      this.route('steps', { path: '/:series_id' }, function () {
-        this.route('step-details', { path: '/:step_id' });
+    this.route('measure-offer', { path: '/subsidymaatregel/:id' }, function () {
+      this.route('steps', { path: '/reeks/:series_id' }, function () {
+        this.route('step-details', { path: '/stap/:step_id' });
       });
     });
   });
