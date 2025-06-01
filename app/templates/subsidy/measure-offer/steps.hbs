@@ -19,32 +19,18 @@
                           style="flex-direction: column; align-items: start; border-radius: 5px; border: 1px solid lightgray;"
                           @route="subsidy.measure-offer.steps.step-details"
                           @model={{step.id}}
-                          {{!-- {{on "click" (fn this.transitionToDetails step)}} --}}
                           {{!template-lint-disable no-inline-styles}}
                         >
                         <div class="au-u-flex au-u-flex--spaced-tiny">
                           <AuHeading @skin="6">{{step.subsidyProceduralStep.description}}</AuHeading></div>
-                          {{#if (this.isFirstStep step)}}
-                            <AuHelpText
-                              @skin="secondary"
-                              @size="small"
-                              style="margin: 0; line-height:normal"
-                              
-                              {{!template-lint-disable no-inline-styles}}
-                            >
-                              Indienen vanaf {{moment-format step.deadline.begin "DD MMMM YYYY"}}
-                            </AuHelpText>
-                          {{/if}}
-                          {{#if (this.isLastStep step)}}
                             <AuHelpText
                               @skin="secondary"
                               @size="small"
                               style="margin: 0; line-height:normal"
                               {{!template-lint-disable no-inline-styles}}
                             >
-                              Indienen tot {{moment-format step.deadline.end "DD MMMM YYYY"}}
+                              Indienen tot <strong>{{moment-format step.deadline.end "DD MMMM YYYY"}}</strong>
                             </AuHelpText>
-                          {{/if}}
                         </AuLink>
                       
                     {{else}}
