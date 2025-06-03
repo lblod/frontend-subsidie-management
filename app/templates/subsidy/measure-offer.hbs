@@ -18,15 +18,15 @@
   </Group>
   <Group>
       <PowerSelect
-        style="width: 200px; text-wrap: nowrap;"
+        style="width: 300px; text-wrap: nowrap;"
         @onChange={{this.updateSelection}}
         @selected={{this.selected}}
-        @options={{this.options}}
+        @options={{this.model.series}}
         @loadingMessage="Aan het laden..."
         as |serie|
       >
         <span>
-          {{serie.label}}
+          {{serie.label}} | {{serie.description}}
         </span>
       </PowerSelect>
       <AuDropdown
