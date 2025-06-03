@@ -9,7 +9,13 @@ export default class SubsidyIndexRoute extends Route.extend(
   @service currentSession;
   @service store;
   async model() {
-    let response = await this.store.findAll('subsidy-measure-offer');
-    return response;
+    return await this.store.findAll('subsidy-measure-offer', {
+      include: [
+        'series',
+        'series.period',
+        'series.active-application-flow.defined-steps',
+        'series.active-application-flow.defined-steps.subsidy-procedural-step',
+      ].join(','),
+    });
   }
 }

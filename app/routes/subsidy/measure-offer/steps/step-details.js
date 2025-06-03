@@ -94,7 +94,9 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
 
     // Access the measure-offer model from the parent route
     let measureOfferModel = this.modelFor('subsidy.measure-offer');
+    let measureOfferController = this.controllerFor('subsidy.measure-offer');
     controller.set('measureOfferModel', measureOfferModel);
+    controller.set('measureOfferController', measureOfferController);
     await controller.setup.perform();
   }
 }
