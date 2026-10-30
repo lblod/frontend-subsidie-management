@@ -24,9 +24,10 @@
                 <AuHeading @skin="3">{{step.order}}. {{step.subsidyProceduralStep.description}}</AuHeading>
                 {{#if step.formSpecification.filename}}
                   <AuHelpText @skin="secondary" class="au-u-margin-top-none">
-                    {{moment-format step.deadline.begin "DD MMMM YYYY"}}
+                    {{moment-format step.subsidyProceduralStep.period.begin "DD MMMM YYYY"}}
                     &#8211;
-                    {{moment-format step.deadline.end "DD MMMM YYYY"}}
+                    {{! A subsidy definition has no dossier to select an organization audience. }}
+                    {{moment-format (effective-deadline null step) "DD MMMM YYYY"}}
                   </AuHelpText>
                   <div class="au-o-box">{{step.formSpecification.filename}}</div>
                 {{else}}

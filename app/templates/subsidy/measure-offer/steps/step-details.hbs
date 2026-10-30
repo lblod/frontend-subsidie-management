@@ -68,8 +68,8 @@
               <div class="au-u-margin-top-small">
                 <AuHeading @skin="5">Beschikbaar tot</AuHeading>
                 <p>
-                  {{#if this.endDate}}
-                    {{moment-format this.endDate "DD MMMM YYYY"}}
+                  {{#if this.effectiveDeadline}}
+                    {{moment-format this.effectiveDeadline "DD MMMM YYYY"}}
                   {{else}}
                     N.V.T.
                   {{/if}}

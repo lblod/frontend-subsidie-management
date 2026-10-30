@@ -32,7 +32,12 @@ export default class SubsidyMeasureOfferStepsStepDetailsRoute extends Route {
       'subsidy-application-flow-step',
       stepID,
       {
-        include: ['form-specification', 'subsidy-procedural-step'].join(','),
+        include: [
+          'form-specification',
+          'subsidy-procedural-step',
+          'subsidy-procedural-step.period',
+          'subsidy-procedural-step.deadline-extensions.audience',
+        ].join(','),
       }
     );
   }

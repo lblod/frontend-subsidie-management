@@ -82,6 +82,7 @@ inflector.irregular('time-block', 'time-blocks');
 inflector.irregular('application-form-entry', 'application-form-entries');
 
 // New subsidy flow
+inflector.irregular('deadline-extension', 'deadline-extensions');
 inflector.irregular('participation', 'participations');
 inflector.irregular('period-of-time', 'periods-of-time');
 inflector.irregular(

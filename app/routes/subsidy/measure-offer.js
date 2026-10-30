@@ -17,6 +17,8 @@ export default class SubsidyMeasureOfferRoute extends Route {
           'series.period',
           'series.active-application-flow.defined-steps',
           'series.active-application-flow.defined-steps.subsidy-procedural-step',
+          'series.active-application-flow.defined-steps.subsidy-procedural-step.period',
+          'series.active-application-flow.defined-steps.subsidy-procedural-step.deadline-extensions.audience',
         ].join(','),
       }
     );
