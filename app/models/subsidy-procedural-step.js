@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 const SUBSIDY_PROCEDURE_STEP_TYPE = {
   EXTERNALLY_PROCESSED:
@@ -14,6 +14,12 @@ export default class SubsidyProceduralStepModel extends Model {
     inverse: null,
   })
   period;
+
+  @hasMany('deadline-extension', {
+    async: true,
+    inverse: 'subsidyProceduralStep',
+  })
+  deadlineExtensions;
 
   get isExternallyProcessed() {
     return (
