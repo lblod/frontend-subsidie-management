@@ -29,7 +29,8 @@
                               style="margin: 0; line-height:normal"
                               {{!template-lint-disable no-inline-styles}}
                             >
-                              Indienen tot <strong>{{moment-format step.deadline.end "DD MMMM YYYY"}}</strong>
+                              {{! A subsidy definition has no dossier to select an organization audience. }}
+                              Indienen tot <strong>{{moment-format (effective-deadline null step) "DD MMMM YYYY"}}</strong>
                             </AuHelpText>
                         </AuLink>
                       

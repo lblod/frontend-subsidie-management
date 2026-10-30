@@ -12,6 +12,8 @@ export default class SubsidyApplicationStepsRoute extends Route {
       {
         include: [
           'active-application-flow.defined-steps.subsidy-procedural-step',
+          'active-application-flow.defined-steps.subsidy-procedural-step.period',
+          'active-application-flow.defined-steps.subsidy-procedural-step.deadline-extensions.audience',
           'active-application-flow.defined-steps',
           'subsidy-measure-offer',
         ].join(','),

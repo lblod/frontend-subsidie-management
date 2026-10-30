@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import moment from 'moment';
 import { restartableTask } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
+import { getEffectiveDeadline } from 'frontend-subsidie-management/helpers/effective-deadline';
 
 export default class SubsidyMeasureOfferController extends Controller {
   @service router;
@@ -95,6 +96,7 @@ export default class SubsidyMeasureOfferController extends Controller {
     const lastProceduralStep = await lastStep.subsidyProceduralStep;
     const periodLastStep = await lastProceduralStep.get('period');
     if (periodLastStep === undefined) return null;
-    return periodLastStep.end;
+    // Series selection has no dossier/applicant, so use the original-date fallback.
+    return getEffectiveDeadline([null, lastStep]);
   }
 }

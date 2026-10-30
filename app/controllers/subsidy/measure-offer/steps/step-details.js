@@ -6,6 +6,7 @@ import { FORM, RDF } from '@lblod/submission-form-helpers';
 import { restartableTask } from 'ember-concurrency';
 import fetch from 'fetch';
 import { NamedNode } from 'rdflib';
+import { getEffectiveDeadline } from 'frontend-subsidie-management/helpers/effective-deadline';
 
 const FORM_GRAPH = new NamedNode('http://data.lblod.info/form');
 const META_GRAPH = new NamedNode('http://data.lblod.info/metagraph');
@@ -15,7 +16,6 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
   @service store;
 
   @tracked startDate;
-  @tracked endDate;
   @tracked form;
   @tracked sourceNode;
   @tracked formNode;
@@ -25,6 +25,11 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
 
   get criteria() {
     return this.measureOfferModel.criteria;
+  }
+
+  get effectiveDeadline() {
+    // This is a subsidy definition preview, without a dossier/applicant.
+    return getEffectiveDeadline([null, this.model]);
   }
 
   graphs = {
@@ -42,9 +47,6 @@ export default class SubsidyMeasureOfferStepsStepDetailsController extends Contr
       .then((period) => {
         return period.begin;
       });
-    this.endDate = await subsidyProceduralStep.get('period').then((period) => {
-      return period.end;
-    });
     await this.setupForm();
   });
 
